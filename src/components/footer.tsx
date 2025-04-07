@@ -3,6 +3,7 @@
 import {config} from "@/config";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
+import Delimiter from "@/components/delimiter";
 
 interface RunningTime {
     days: string;
@@ -28,10 +29,6 @@ function getRunningTime(createdDate: string): RunningTime {
     };
 }
 
-function Delimiter() {
-    return <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>;
-}
-
 export default function Footer() {
     const [runningTime, setRunningTime] = useState<RunningTime>({
         days: "00",
@@ -50,10 +47,10 @@ export default function Footer() {
 
     return (
         <>
-            <footer className="m-auto text-center text-sm/5">
+            <footer className="m-auto text-center text-sm/5 pt-7 pb-8">
                 <span>© {new Date().getFullYear()} </span>
                 <span>{config.site.title}</span>
-                <Delimiter/>
+                <Delimiter />
                 {
                     config.site.beian &&
                     <Link href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
