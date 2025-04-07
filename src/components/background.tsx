@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import {mergeClasses} from "@/utils";
 import {config} from "@/config";
 
-export default function Background({children}: {children: ReactNode}) {
+export default function Background({children}: { children: ReactNode }) {
     const bg = config.site.background;
 
     // 计算背景样式

@@ -10,16 +10,16 @@ export const config = {
             showTitle: true,
             icon: "/favicon.png",
             entries: [
-                { href: '/', label: 'Home', icon: "🏠" },
-                { href: '/articles', label: 'Articles', icon: "📙" },
-                { href: '/album', label: 'Album', icon: "🎞️" },
-                { href: '/search', label: 'Search', icon: "👻" },
-                { href: '/about', label: 'About', icon: "🔎" }
+                {href: '/', label: 'Home', icon: "🏠"},
+                {href: '/articles', label: 'Articles', icon: "📙"},
+                {href: '/album', label: 'Album', icon: "🎞️"},
+                {href: '/about', label: 'About', icon: "👻"},
+                {href: '/search', label: 'Search', icon: "🔎"},
             ]
         },
         background: {
             type: "gradient",
-            style: "linear-gradient(75deg, #eeeeee, #9333ea)",
+            style: "linear-gradient(75deg, #7a0f40, #9333ea)",
             opacity: 1,
             overlay: true,
             overlayColor: "#000000",

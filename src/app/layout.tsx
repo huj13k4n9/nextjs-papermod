@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "./globals.css";
 import React from "react";
 import {config} from "@/config";
@@ -11,20 +11,20 @@ export const metadata: Metadata = {
     description: config.site.description,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+export default function RootLayout({ children }: Readonly<{
+    children: React.ReactNode;
 }>) {
     return (
-    <html lang="zh">
-      <body className={`min-w-md overflow-x-hidden`}>
+        <html lang="zh">
+        <body className={`min-w-md overflow-x-hidden`}>
         <Background>
-            <Header />
-            {children}
-            <Footer />
+            <Header/>
+            <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                {children}
+            </main>
+            <Footer/>
         </Background>
-      </body>
-    </html>
+        </body>
+        </html>
     );
 }

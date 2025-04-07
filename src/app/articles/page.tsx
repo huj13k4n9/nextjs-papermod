@@ -1,5 +1,6 @@
-export default function Archives() {
+export default function Articles() {
     return (
-        <h1>Archives Page</h1>
+        <h1>Articles Page</h1>
+
     );
 }
