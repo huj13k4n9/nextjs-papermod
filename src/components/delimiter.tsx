@@ -1,5 +1,9 @@
 import React from "react";
 
-export default function Delimiter() {
-    return <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>;
+interface DelimiterProps {
+    char?: string;
+}
+
+export default function Delimiter({ char = "·"}: DelimiterProps): React.ReactElement {
+    return <span>&nbsp;&nbsp;{char}&nbsp;&nbsp;</span>;
 }

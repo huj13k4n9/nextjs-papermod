@@ -47,9 +47,9 @@ export default function Footer() {
 
     return (
         <>
-            <footer className="m-auto text-center text-sm/5 pt-7 pb-8">
+            <footer className="m-auto text-center text-sm/5 pt-5 pb-8">
                 <span>© {new Date().getFullYear()} </span>
-                <span>{config.site.title}</span>
+                <span>{config.site.author}</span>
                 <Delimiter />
                 {
                     config.site.beian &&
@@ -58,7 +58,7 @@ export default function Footer() {
                     </Link>
                 }
                 <br/>
-                <span>本站已运行{runningTime.days}天{runningTime.hours}小时{runningTime.minutes}分{runningTime.seconds}秒</span>
+                <span>本站已运行 {runningTime.days} 天 {runningTime.hours} 小时 {runningTime.minutes} 分 {runningTime.seconds} 秒</span>
             </footer>
         </>
     );
