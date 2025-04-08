@@ -9,19 +9,38 @@ import {usePathname} from "next/navigation";
 import * as motion from "motion/react-client"
 import {AnimatePresence} from "motion/react"
 
+const animateAttr = {
+    type: "spring",
+    stiffness: 150,
+    damping: 20,
+}
+
 export default function Header() {
     const navAttrs = config.site.nav;
     const currentPath = usePathname()
+    const isBlogPage = currentPath.includes("/article/");
 
     return (
         <header className="pt-4 pb-3 w-full">
-            <div className="max-w-5xl mx-auto px-8 w-full select-none">
+            <motion.div className={"mx-auto px-8 w-full select-none"}
+                initial={{ maxWidth: "56rem" }}
+                animate={{ maxWidth: isBlogPage ? "72rem" : "56rem" }}
+                transition={{
+                    ...animateAttr,
+                    delay: 0.5,
+                }}
+            >
                 <div className={cn(
                     `flex flex-col md:justify-between items-center`,
                     (navAttrs.showIcon || navAttrs.showTitle) && `md:flex-row`
                 )}>
                     {(navAttrs.showIcon || navAttrs.showTitle) &&
-                        <a href="/" className="flex items-center mb-4 md:mb-0">
+                        <motion.a href="/" className="flex items-center mb-4 md:mb-0"
+                            layout
+                            transition={{
+                                ...animateAttr,
+                            }}
+                        >
                             {navAttrs.showIcon &&
                                 <Image src={navAttrs.icon} alt="Site Logo" width={32} height={32}
                                        className="mr-3 rounded-full"/>
@@ -29,7 +48,7 @@ export default function Header() {
                             {config.site.nav.showTitle &&
                                 <span className="text-xl font-bold">{config.site.title}</span>
                             }
-                        </a>
+                        </motion.a>
                     }
 
                     <nav>
@@ -37,9 +56,7 @@ export default function Header() {
                             className={`flex space-x-6 list-none w-full`}
                             layout
                             transition={{
-                                type: "spring",
-                                stiffness: 150,
-                                damping: 20,
+                                ...animateAttr,
                             }}
                         >
                             {navAttrs.entries.map((link, index) => (
@@ -79,9 +96,7 @@ export default function Header() {
                                                 className={`absolute inset-0 bg-[#ffffff33] rounded-md -z-10 -ml-1.5 -mr-2.5 -my-0.5`}
                                                 layoutId="underline"
                                                 transition={{
-                                                    type: "spring",
-                                                    stiffness: 150,
-                                                    damping: 20,
+                                                    ...animateAttr,
                                                     duration: 0.5
                                                 }}
                                             />
@@ -92,7 +107,7 @@ export default function Header() {
                         </motion.ul>
                     </nav>
                 </div>
-            </div>
+            </motion.div>
         </header>
     );
 };

@@ -30,12 +30,8 @@ function getRunningTime(createdDate: string): RunningTime {
 }
 
 export default function Footer() {
-    const [runningTime, setRunningTime] = useState<RunningTime>({
-        days: "00",
-        hours: "00",
-        minutes: "00",
-        seconds: "00",
-    });
+
+    const [runningTime, setRunningTime] = useState<RunningTime>(getRunningTime(config.site.created));
 
     useEffect(() => {
         const interval = setInterval(() => {
