@@ -47,7 +47,7 @@ export default function Footer() {
 
     return (
         <>
-            <footer className="m-auto text-center text-sm/5 pt-5 pb-8">
+            <footer className="m-auto text-center text-xs pt-5 pb-8 leading-relaxed">
                 <span>© {new Date().getFullYear()} </span>
                 <span>{config.site.author}</span>
                 <Delimiter />

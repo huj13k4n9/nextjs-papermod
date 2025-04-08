@@ -4,12 +4,11 @@ import Delimiter from "@/components/delimiter";
 import {cn, getArticleAttrs} from "@/lib/utils";
 import {socialIcons} from "@/components/icons";
 import {config} from "@/config";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip";
 import {
     PaginationEllipsis,
     PaginationNumber
 } from "@/components/ui/pagination";
-import { LuChevronLeft, LuChevronRight, LuEllipsis  } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import {redirect} from "next/navigation";
 
 interface ArticleProps {
@@ -18,6 +17,34 @@ interface ArticleProps {
     summary: string;
     uri: string;
     wordCount: number;
+}
+
+function IndexBanner(): React.ReactElement {
+    const indexBannerConfig = config.site.indexPage;
+    return (
+        <>
+            <h1 className={`text-[40px] font-bold`}>{indexBannerConfig.title}</h1>
+            <h3 className={`text-lg mt-2 mb-4`}>{indexBannerConfig.subtitle}</h3>
+            <div className={`flex flex-row flex-wrap gap-3 py-3`}>
+                {indexBannerConfig.socialLinks.map((item, index) => {
+                    const IconComponent = socialIcons[item.type as keyof typeof socialIcons];
+                    return (
+                        <div key={index} className="relative group">
+                            <a href={item.href === "" ? "#" : item.href} target="_blank" className={`[&>*]:w-7 [&>*]:h-7 block`}>
+                                <IconComponent/>
+                            </a>
+                            <div className="z-10 absolute left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                <div className="bg-gray-800 text-white text-sm rounded py-1 px-2 mt-2 whitespace-nowrap">
+                                    {item.tooltip}
+                                </div>
+                                <div className="w-2 h-2 bg-gray-800 transform rotate-45 absolute top-1 left-1/2 -translate-x-1/2"></div>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        </>
+    )
 }
 
 function ArticlePreview(ap: ArticleProps): React.ReactElement {
@@ -32,7 +59,7 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
                         {ap.wordCount} 字
                     </h2>
                 </div>
-                <p className="line-clamp-2 text-base sm:mb-0">{ap.summary}</p>
+                <p className="line-clamp-2 text-base leading-relaxed sm:mb-0">{ap.summary}</p>
                 <h2 className="sm:hidden text-[15px]">
                     {ap.date.getFullYear()} 年 {ap.date.getMonth() + 1} 月 {ap.date.getDate()} 日
                     <Delimiter/>
@@ -40,36 +67,6 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
                 </h2>
             </a>
         </article>
-    )
-}
-
-function IndexBanner(): React.ReactElement {
-    const indexBannerConfig = config.site.indexPage;
-    return (
-        <>
-            <h1 className={`text-4xl font-bold`}>{indexBannerConfig.title}</h1>
-            <h3 className={`text-lg my-3.5`}>{indexBannerConfig.subtitle}</h3>
-            <div className={`flex flex-row flex-wrap gap-3 py-3`}>
-                {indexBannerConfig.socialLinks.map((item, index) => {
-                    const IconComponent = socialIcons[item.type as keyof typeof socialIcons];
-                    return (
-                        <TooltipProvider key={index}>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <a href={item.href === "" ? "#" : item.href} target="_blank" title={item.tooltip}
-                                       className={`[&>*]:w-7 [&>*]:h-7`}>
-                                        <IconComponent/>
-                                    </a>
-                                </TooltipTrigger>
-                                <TooltipContent side="bottom">
-                                    <p>{item.tooltip}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    )
-                })}
-            </div>
-        </>
     )
 }
 
@@ -103,7 +100,7 @@ export default async function Home({searchParams}: {
 
     return (
         <>
-            <div className={`flex flex-col justify-center min-h-80 px-2`}>
+            <div className={`flex flex-col justify-center min-h-96 px-2`}>
                 <IndexBanner/>
             </div>
             <div className="space-y-6">
@@ -143,7 +140,6 @@ export default async function Home({searchParams}: {
                     </a>
                 </div>
             }
-            {/*(Page: {currentPage}/{pageCount})*/}
         </>
     );
 }

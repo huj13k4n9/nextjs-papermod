@@ -15,21 +15,21 @@ export default function Header() {
 
     return (
         <header className="pt-4 pb-3 w-full">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full select-none">
+            <div className="max-w-5xl mx-auto px-8 w-full select-none">
                 <div className={cn(
                     `flex flex-col md:justify-between items-center`,
                     (navAttrs.showIcon || navAttrs.showTitle) && `md:flex-row`
                 )}>
                     {(navAttrs.showIcon || navAttrs.showTitle) &&
-                        <div className="flex items-center mb-4 md:mb-0">
+                        <a href="/" className="flex items-center mb-4 md:mb-0">
                             {navAttrs.showIcon &&
                                 <Image src={navAttrs.icon} alt="Site Logo" width={32} height={32}
                                        className="mr-3 rounded-full"/>
                             }
                             {config.site.nav.showTitle &&
-                                <span className="text-2xl font-bold">{config.site.title}</span>
+                                <span className="text-xl font-bold">{config.site.title}</span>
                             }
-                        </div>
+                        </a>
                     }
 
                     <nav>
@@ -52,7 +52,7 @@ export default function Header() {
                                         <div className={`flex items-center min-h-[28px] min-w-[24px]`}>
                                             <motion.span
                                                 layout
-                                                className="text-lg pr-1.5"
+                                                className="text-base pr-1.5"
                                             >
                                                 {link.icon}
                                             </motion.span>
@@ -67,7 +67,7 @@ export default function Header() {
                                                             opacity: {duration: 0.4},
                                                             width: {duration: 0.4, ease: [0.4, 0, 0.2, 1]}
                                                         }}
-                                                        className="text-lg font-bold overflow-hidden whitespace-nowrap"
+                                                        className="text-base font-bold overflow-hidden whitespace-nowrap"
                                                     >
                                                         {link.label}
                                                     </motion.span>
