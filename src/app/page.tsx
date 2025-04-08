@@ -4,11 +4,8 @@ import Delimiter from "@/components/delimiter";
 import {cn, getArticleAttrs} from "@/lib/utils";
 import {socialIcons} from "@/components/icons";
 import {config} from "@/config";
-import {
-    PaginationEllipsis,
-    PaginationNumber
-} from "@/components/ui/pagination";
-import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import {PaginationEllipsis, PaginationNumber} from "@/components/ui/pagination";
+import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 import {redirect} from "next/navigation";
 
 interface ArticleProps {
@@ -30,14 +27,18 @@ function IndexBanner(): React.ReactElement {
                     const IconComponent = socialIcons[item.type as keyof typeof socialIcons];
                     return (
                         <div key={index} className="relative group">
-                            <a href={item.href === "" ? "#" : item.href} target="_blank" className={`[&>*]:w-7 [&>*]:h-7 block`}>
+                            <a href={item.href === "" ? "#" : item.href} target="_blank"
+                               className={`[&>*]:w-7 [&>*]:h-7 block`}>
                                 <IconComponent/>
                             </a>
-                            <div className="z-10 absolute left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                                <div className="bg-gray-800 text-white text-sm rounded py-1 px-2 mt-2 whitespace-nowrap">
+                            <div
+                                className="z-10 absolute left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                <div
+                                    className="bg-gray-800 text-white text-sm rounded py-1 px-2 mt-2 whitespace-nowrap">
                                     {item.tooltip}
                                 </div>
-                                <div className="w-2 h-2 bg-gray-800 transform rotate-45 absolute top-1 left-1/2 -translate-x-1/2"></div>
+                                <div
+                                    className="w-2 h-2 bg-gray-800 transform rotate-45 absolute top-1 left-1/2 -translate-x-1/2"></div>
                             </div>
                         </div>
                     )
@@ -125,11 +126,11 @@ export default async function Home({searchParams}: {
                         <span>Previous</span>
                     </a>
                     <div className={`inline-flex flex-row items-center justify-center`}>
-                        {currentPage-2 > 0 && <PaginationEllipsis /> }
-                        {currentPage-1 > 0 && <PaginationNumber page={currentPage-1} /> }
-                        <PaginationNumber page={currentPage} />
-                        {currentPage+1 <= pageCount && <PaginationNumber page={currentPage+1} /> }
-                        {currentPage+2 <= pageCount && <PaginationEllipsis /> }
+                        {currentPage - 2 > 0 && <PaginationEllipsis/>}
+                        {currentPage - 1 > 0 && <PaginationNumber page={currentPage - 1}/>}
+                        <PaginationNumber page={currentPage}/>
+                        {currentPage + 1 <= pageCount && <PaginationNumber page={currentPage + 1}/>}
+                        {currentPage + 2 <= pageCount && <PaginationEllipsis/>}
                     </div>
                     <a href={`/?page=${currentPage + 1}`}
                        className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === pageCount ? "invisible" : "")}

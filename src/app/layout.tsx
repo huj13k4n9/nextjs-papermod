@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: config.site.description,
 };
 
-export default function RootLayout({ children }: Readonly<{
+export default function RootLayout({children}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (

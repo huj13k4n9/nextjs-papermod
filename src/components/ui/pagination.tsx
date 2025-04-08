@@ -9,8 +9,8 @@ interface PaginationProps {
 function PaginationNumber({page}: PaginationProps): React.ReactElement {
     return (
         <a href={`/?page=${page}`}
-         className={`inline-flex items-center justify-center rounded-md text-sm size-9`}
-         title={`Go to page ${page}`}
+           className={`inline-flex items-center justify-center rounded-md text-sm size-9`}
+           title={`Go to page ${page}`}
         >{page}</a>
     )
 }

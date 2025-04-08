@@ -50,7 +50,7 @@ export default function Footer() {
             <footer className="m-auto text-center text-xs pt-5 pb-8 leading-relaxed">
                 <span>© {new Date().getFullYear()} </span>
                 <span>{config.site.author}</span>
-                <Delimiter />
+                <Delimiter/>
                 {
                     config.site.beian &&
                     <Link href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
