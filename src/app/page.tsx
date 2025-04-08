@@ -7,6 +7,7 @@ import {config} from "@/config";
 import {PaginationEllipsis, PaginationNumber} from "@/components/ui/pagination";
 import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 import {redirect} from "next/navigation";
+import Link from "next/link";
 
 interface ArticleProps {
     title: string;
@@ -27,10 +28,10 @@ function IndexBanner(): React.ReactElement {
                     const IconComponent = socialIcons[item.type as keyof typeof socialIcons];
                     return (
                         <div key={index} className="relative group">
-                            <a href={item.href === "" ? "#" : item.href} target="_blank"
+                            <Link href={item.href === "" ? "#" : item.href} target="_blank"
                                className={`[&>*]:w-7 [&>*]:h-7 block`}>
                                 <IconComponent/>
-                            </a>
+                            </Link>
                             <div
                                 className="z-10 absolute left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                                 <div
@@ -51,7 +52,7 @@ function IndexBanner(): React.ReactElement {
 function ArticlePreview(ap: ArticleProps): React.ReactElement {
     return (
         <article>
-            <a href={ap.uri} className="flex flex-col space-y-3 p-6 border-1 rounded-2xl">
+            <Link href={ap.uri} className="flex flex-col space-y-3 p-6 border-1 rounded-2xl">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <h2 className="font-bold text-2xl">{ap.title}</h2>
                     <h2 className="hidden sm:block text-[15px]">
@@ -66,7 +67,7 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
                     <Delimiter/>
                     {ap.wordCount} 字
                 </h2>
-            </a>
+            </Link>
         </article>
     )
 }
@@ -118,13 +119,13 @@ export default async function Home({searchParams}: {
             </div>
             {pageCount > 1 &&
                 <div className={`flex flex-row justify-between pt-5`}>
-                    <a href={`/?page=${currentPage - 1}`}
+                    <Link href={`/?page=${currentPage - 1}`}
                        className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === 1 ? "invisible" : "")}
                        title="Go to previous page"
                     >
                         <LuChevronLeft/>
                         <span>Previous</span>
-                    </a>
+                    </Link>
                     <div className={`inline-flex flex-row items-center justify-center`}>
                         {currentPage - 2 > 0 && <PaginationEllipsis/>}
                         {currentPage - 1 > 0 && <PaginationNumber page={currentPage - 1}/>}
@@ -132,13 +133,13 @@ export default async function Home({searchParams}: {
                         {currentPage + 1 <= pageCount && <PaginationNumber page={currentPage + 1}/>}
                         {currentPage + 2 <= pageCount && <PaginationEllipsis/>}
                     </div>
-                    <a href={`/?page=${currentPage + 1}`}
+                    <Link href={`/?page=${currentPage + 1}`}
                        className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === pageCount ? "invisible" : "")}
                        title="Go to next page"
                     >
                         <span>Next</span>
                         <LuChevronRight/>
-                    </a>
+                    </Link>
                 </div>
             }
         </>

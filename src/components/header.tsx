@@ -41,14 +41,16 @@ export default function Header() {
                                 ...animateAttr,
                             }}
                         >
-                            {navAttrs.showIcon &&
-                                <Image src={navAttrs.icon} alt="Site Logo" width={32} height={32}
-                                       className="mr-3 rounded-full"/>
-                            }
-                            {config.site.nav.showTitle &&
-                                <span className="text-xl font-bold">{config.site.title}</span>
-                            }
-                        </motion.a>
+                            <Link href="/" className="flex items-center mb-4 md:mb-0">
+                                {navAttrs.showIcon &&
+                                    <Image src={navAttrs.icon} alt="Site Logo" width={32} height={32}
+                                           className="mr-3 rounded-full"/>
+                                }
+                                {config.site.nav.showTitle &&
+                                    <span className="text-xl font-bold">{config.site.title}</span>
+                                }
+                            </Link>
+                        </motion.div>
                     }
 
                     <nav>

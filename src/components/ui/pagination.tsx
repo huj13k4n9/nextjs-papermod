@@ -1,5 +1,6 @@
 import * as React from "react"
 import {LuEllipsis} from "react-icons/lu";
+import Link from "next/link";
 
 interface PaginationProps {
     page: number;
@@ -8,10 +9,10 @@ interface PaginationProps {
 
 function PaginationNumber({page}: PaginationProps): React.ReactElement {
     return (
-        <a href={`/?page=${page}`}
+        <Link href={`/?page=${page}`}
            className={`inline-flex items-center justify-center rounded-md text-sm size-9`}
            title={`Go to page ${page}`}
-        >{page}</a>
+        >{page}</Link>
     )
 }
 
