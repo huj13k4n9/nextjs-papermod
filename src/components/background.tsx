@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {mergeClasses} from "@/utils";
+import {cn} from "@/lib/utils";
 import {config} from "@/config";
 
 export default function Background({children}: { children: ReactNode }) {
@@ -25,7 +25,7 @@ export default function Background({children}: { children: ReactNode }) {
     return (
         <div className="relative w-full min-h-screen">
             <div
-                className={mergeClasses(
+                className={cn(
                     'absolute inset-0 w-full h-full z-0',
                     bg.fixed ? 'fixed' : 'absolute'
                 )}
@@ -34,7 +34,7 @@ export default function Background({children}: { children: ReactNode }) {
 
             {bg.overlay && (
                 <div
-                    className={mergeClasses(
+                    className={cn(
                         'absolute inset-0 w-full h-full z-0',
                         bg.fixed ? 'fixed' : 'absolute'
                     )}

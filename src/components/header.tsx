@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {config} from "@/config";
-import {mergeClasses} from "@/utils";
+import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
 import * as motion from "motion/react-client"
 import {AnimatePresence} from "motion/react"
@@ -16,7 +16,7 @@ export default function Header() {
     return (
         <header className="pt-4 pb-3 w-full">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full select-none">
-                <div className={mergeClasses(
+                <div className={cn(
                     `flex flex-col md:justify-between items-center`,
                     (navAttrs.showIcon || navAttrs.showTitle) && `md:flex-row`
                 )}>
