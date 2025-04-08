@@ -35,7 +35,7 @@ export default function Header() {
                     (navAttrs.showIcon || navAttrs.showTitle) && `md:flex-row`
                 )}>
                     {(navAttrs.showIcon || navAttrs.showTitle) &&
-                        <motion.a href="/" className="flex items-center mb-4 md:mb-0"
+                        <motion.div
                             layout
                             transition={{
                                 ...animateAttr,
@@ -76,21 +76,23 @@ export default function Header() {
                                                 {link.icon}
                                             </motion.span>
                                             <AnimatePresence mode="wait" initial={false}>
-                                                {currentPath === link.href ? (
-                                                    <motion.span
-                                                        key={link.href}
-                                                        initial={{opacity: 0, width: 0}}
-                                                        animate={{opacity: 1, width: "auto"}}
-                                                        exit={{opacity: 0, width: 0}}
-                                                        transition={{
-                                                            opacity: {duration: 0.4},
-                                                            width: {duration: 0.4, ease: [0.4, 0, 0.2, 1]}
-                                                        }}
-                                                        className="text-base font-bold overflow-hidden whitespace-nowrap"
-                                                    >
-                                                        {link.label}
-                                                    </motion.span>
-                                                ) : null}
+                                                <motion.span
+                                                    key={link.href}
+                                                    initial={{opacity: 0, width: 0}}
+                                                    animate={{opacity: 1, width: "auto"}}
+                                                    exit={{opacity: 0, width: 0}}
+                                                    transition={{
+                                                        ...animateAttr,
+                                                        opacity: {duration: 0.5},
+                                                        width: {duration: 0.5},
+                                                    }}
+                                                    className={cn(
+                                                        "text-base font-bold overflow-hidden",
+                                                        currentPath !== link.href && "hidden"
+                                                    )}
+                                                >
+                                                    {link.label}
+                                                </motion.span>
                                             </AnimatePresence>
                                         </div>
                                         {currentPath === link.href && (
