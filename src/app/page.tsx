@@ -1,7 +1,7 @@
 import {allPosts} from "content-collections";
 import React from "react";
 import Delimiter from "@/components/delimiter";
-import {cn, getArticleAttrs} from "@/lib/utils";
+import {cn} from "@/lib/utils";
 import {socialIcons} from "@/components/icons";
 import {config} from "@/config";
 import {PaginationEllipsis, PaginationNumber} from "@/components/ui/pagination";
@@ -75,20 +75,10 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
 export default async function Home({searchParams}: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-    const articlesAttr: ArticleProps[] = allPosts.map((post) => {
-        const {wordCount, summary} = getArticleAttrs(post.content);
-        return {
-            title: post.title,
-            date: post.date,
-            uri: "/article/" + post._meta.path,
-            summary,
-            wordCount,
-        }
-    })
-    articlesAttr.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sortedPosts = allPosts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
     const pageSize = config.site.indexPage.pagination;
-    const pageCount = Math.ceil(articlesAttr.length / pageSize);
+    const pageCount = Math.ceil(sortedPosts.length / pageSize);
     const params = await searchParams;
     let currentPage = params.page ? parseInt(params.page as string) : 1;
 
@@ -98,7 +88,7 @@ export default async function Home({searchParams}: {
 
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const currentPageArticles = articlesAttr.slice(startIndex, endIndex);
+    const currentPageArticles = sortedPosts.slice(startIndex, endIndex);
 
     return (
         <>

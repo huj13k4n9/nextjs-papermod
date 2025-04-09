@@ -1,4 +1,5 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
+import {getArticleAttrs} from "@/lib/utils";
 
 const posts = defineCollection({
     name: "posts",
@@ -9,8 +10,12 @@ const posts = defineCollection({
         date: z.string(),
     }),
     transform: (data) => {
+        const {wordCount, summary} = getArticleAttrs(data.content);
         return {
             ...data,
+            wordCount,
+            summary,
+            uri: "/article/" + data._meta.path,
             date: new Date(data.date),
         };
     },

@@ -1,5 +1,29 @@
 import {allPosts} from "content-collections";
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import {MDXComponents} from "@/components/mdx-components";
+import Delimiter from "@/components/delimiter";
+import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from 'rehype-slug';
+import React from "react";
+import 'katex/dist/katex.min.css';
+
+const options = {
+    mdxOptions: {
+        remarkPlugins: [remarkGfm, remarkMath],
+        rehypePlugins: [
+            rehypeKatex,
+            [rehypePrettyCode, {
+                bypassInlineCode: true,
+                defaultLang: "plaintext",
+                keepBackground: false,
+            }],
+            rehypeSlug
+        ],
+    }
+}
 
 async function getBlogsFromParams(slugs: string[]) {
     const slug = slugs?.join("/") || ""
@@ -22,5 +46,20 @@ export default async function BlogArticlePage({ params }: {
         return <div>404</div>
     }
 
-    return <MDXRemote source={blog.content} />
+    // @ts-ignore
+    return (
+        <div className={`flex flex-col`}>
+            <div className={`flex flex-col w-full mb-20`}>
+                <h1 className={`text-4xl font-bold mb-1.5`}>{blog.title}</h1>
+                <h2 className="text-sm">
+                    {blog.date.getFullYear()} 年 {blog.date.getMonth() + 1} 月 {blog.date.getDate()} 日
+                    <Delimiter/>
+                    {blog.wordCount} 字
+                </h2>
+            </div>
+            <div className={`article-content`}>
+                <MDXRemote source={blog.content} components={MDXComponents} options={options} />
+            </div>
+        </div>
+    )
 }

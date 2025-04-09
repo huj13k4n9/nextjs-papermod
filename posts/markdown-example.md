@@ -3,7 +3,20 @@ title: Markdown Sample
 date: 2025-04-05 00:00:00
 ---
 
-# h1 Heading 8-)
+# h1 Heading 
+Enable typographer option to see result.
+## h2 Heading 
+Enable typographer option to see result.
+### h3 Heading 
+Enable typographer option to see result.
+#### h4 Heading 
+Enable typographer option to see result.
+##### h5 Heading 
+Enable typographer option to see result.
+###### h6 Heading
+Enable typographer option to see result.
+
+# h1 Heading
 ## h2 Heading
 ### h3 Heading
 #### h4 Heading
@@ -72,27 +85,9 @@ Ordered
 2. Consectetur adipiscing elit
 3. Integer molestie lorem at massa
 
-
-1. You can use sequential numbers...
-1. ...or keep all the numbers as `1.`
-
-Start numbering with offset:
-
-57. foo
-1. bar
-
-
 ## Code
 
 Inline `code`
-
-Indented code
-
-    // Some comments
-    line 1 of code
-    line 2 of code
-    line 3 of code
-
 
 Block code "fences"
 
