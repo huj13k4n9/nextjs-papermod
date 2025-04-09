@@ -5,13 +5,15 @@ import {config} from "@/config";
 export default function Background({children}: { children: ReactNode }) {
     const bg = config.site.background;
 
-    // 计算背景样式
     const getBackgroundStyle = () => {
         switch (bg.type) {
             case 'gradient':
                 return {
                     backgroundImage: bg.style,
                     opacity: bg.opacity,
+                    backgroundAttachment: bg.fixed ? 'fixed' : 'scroll',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                 };
             case 'color':
             default:

@@ -42,12 +42,12 @@ export const config = {
         },
         background: {
             type: "gradient",
-            style: "linear-gradient(75deg, #7a0f40, #9333ea)",
+            style: "linear-gradient(0deg, #7a0f40, #9333ea)",
             opacity: 1,
             overlay: true,
             overlayColor: "#000000",
             overlayOpacity: 0.8,
-            fixed: false,
+            fixed: true,
         }
     }
 }
