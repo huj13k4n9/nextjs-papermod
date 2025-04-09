@@ -16,7 +16,10 @@ export default function RootLayout({children}: Readonly<{
 }>) {
     return (
         <html lang="zh">
-        <body className={`min-w-md overflow-x-hidden dark`}>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        </head>
+        <body className={`min-w-xs overflow-x-hidden dark`}>
         <Background>
             <Header/>
             <main className="max-w-4xl mx-auto px-8 py-6">
