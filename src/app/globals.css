@@ -125,3 +125,76 @@ body {
         @apply bg-background text-foreground;
     }
 }
+
+
+@layer components {
+    /* Article content heading margin adjustments */
+    .article-content {
+        h1 + h1,
+        h1 + h2,
+        h2 + h2,
+        h1 + h3,
+        h2 + h3,
+        h3 + h3 {
+            @apply !mt-3;
+        }
+
+        h1 + h4,
+        h2 + h4,
+        h3 + h4,
+        h4 + h4,
+        h1 + h5,
+        h2 + h5,
+        h3 + h5,
+        h4 + h5,
+        h5 + h5,
+        h1 + h6,
+        h2 + h6,
+        h3 + h6,
+        h4 + h6,
+        h5 + h6,
+        h6 + h6 {
+            @apply !mt-1.5;
+        }
+
+        /* Style adjustments for lists */
+        ul p, ol p{
+            @apply !mb-0;
+        }
+
+        ul ol,
+        ul ul,
+        ol ol,
+        ol ul,
+        ul * ol,
+        ul * ul,
+        ol * ul,
+        ol * ol,
+        * li ul,
+        * li ol {
+            @apply !my-1;
+        }
+
+        :is(dir, menu, ol, ul) ul {
+            @apply !list-[circle];
+        }
+        :is(dir, menu, ol, ul) :is(dir, menu, ol, ul) ul {
+            @apply !list-[square];
+        }
+
+        /* Code blocks */
+        figure[data-rehype-pretty-code-figure] pre code{
+            @apply px-5 py-3.5 rounded-lg overflow-auto leading-snug;
+            counter-reset: line;
+        }
+        figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
+            counter-increment: line;
+            content: counter(line);
+            @apply inline-block w-6 mr-5 text-right text-gray-200;
+        }
+
+        p code {
+            @apply relative bottom-[1px] px-1.5 pb-[2.5px] pt-[3.5px] rounded-md;
+        }
+    }
+}
