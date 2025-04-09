@@ -22,7 +22,14 @@ function PaginationEllipsis(): React.ReactElement {
     )
 }
 
+function PaginationPlaceholder(): React.ReactElement {
+    return (
+        <span className={`inline-flex items-center justify-center rounded-md text-sm size-9`}></span>
+    )
+}
+
 export {
     PaginationNumber,
-    PaginationEllipsis
+    PaginationEllipsis,
+    PaginationPlaceholder
 }

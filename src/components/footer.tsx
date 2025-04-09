@@ -30,10 +30,10 @@ function getRunningTime(createdDate: string): RunningTime {
 }
 
 export default function Footer() {
-
+    const [mounted, setMounted] = useState(false);
     const [runningTime, setRunningTime] = useState<RunningTime>(getRunningTime(config.site.created));
-
     useEffect(() => {
+        setMounted(true);
         const interval = setInterval(() => {
             const time = getRunningTime(config.site.created);
             setRunningTime(time);
@@ -54,8 +54,11 @@ export default function Footer() {
                     </Link>
                 }
                 <br/>
-                <span>本站已运行 {runningTime.days} 天 {runningTime.hours} 小时 {runningTime.minutes} 分 {runningTime.seconds} 秒</span>
+                {mounted && (
+                    <span>本站已运行 {runningTime.days} 天 {runningTime.hours} 小时 {runningTime.minutes} 分 {runningTime.seconds} 秒</span>
+                )}
             </footer>
         </>
     );
 }
+

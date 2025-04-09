@@ -4,7 +4,7 @@ import Delimiter from "@/components/delimiter";
 import {cn} from "@/lib/utils";
 import {socialIcons} from "@/components/icons";
 import {config} from "@/config";
-import {PaginationEllipsis, PaginationNumber} from "@/components/ui/pagination";
+import {PaginationNumber, PaginationPlaceholder} from "@/components/ui/pagination";
 import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 import {redirect} from "next/navigation";
 import Link from "next/link";
@@ -117,11 +117,9 @@ export default async function Home({searchParams}: {
                         <span>Previous</span>
                     </Link>
                     <div className={`inline-flex flex-row items-center justify-center`}>
-                        {currentPage - 2 > 0 && <PaginationEllipsis/>}
-                        {currentPage - 1 > 0 && <PaginationNumber page={currentPage - 1}/>}
+                        {currentPage - 1 > 0 ? <PaginationNumber page={currentPage - 1}/> : <PaginationPlaceholder />}
                         <PaginationNumber page={currentPage}/>
-                        {currentPage + 1 <= pageCount && <PaginationNumber page={currentPage + 1}/>}
-                        {currentPage + 2 <= pageCount && <PaginationEllipsis/>}
+                        {currentPage + 1 <= pageCount ? <PaginationNumber page={currentPage + 1}/> : <PaginationPlaceholder />}
                     </div>
                     <Link href={`/?page=${currentPage + 1}`}
                        className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === pageCount ? "invisible" : "")}

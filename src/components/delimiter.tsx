@@ -5,5 +5,5 @@ interface DelimiterProps {
 }
 
 export default function Delimiter({char = "·"}: DelimiterProps): React.ReactElement {
-    return <span>&nbsp;&nbsp;{char}&nbsp;&nbsp;</span>;
+    return <span>&nbsp;{char}&nbsp;</span>;
 }
