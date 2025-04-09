@@ -1,7 +1,7 @@
 import {allPosts} from "content-collections";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {MDXComponents} from "@/components/mdx-components";
-import Delimiter from "@/components/delimiter";
+import Delimiter from "@/components/ui/delimiter";
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
@@ -48,7 +48,6 @@ export default async function BlogArticlePage({params}: {
         return <div>404</div>
     }
 
-    // @ts-ignore
     return (
         <div className={`flex flex-col`}>
             <div className={`flex flex-col w-full mt-8 mb-12`}>

@@ -3,7 +3,7 @@
 import {config} from "@/config";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
-import Delimiter from "@/components/delimiter";
+import Delimiter from "@/components/ui/delimiter";
 
 interface RunningTime {
     days: string;

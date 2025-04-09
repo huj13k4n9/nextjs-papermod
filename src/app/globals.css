@@ -126,6 +126,25 @@ body {
     }
 }
 
+@layer utilities {
+    /* Scrollbar for code blocks */
+    .code-scrollbar code {
+        &::-webkit-scrollbar {
+            @apply h-4 bg-transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            @apply bg-white/25 rounded-xl;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            @apply bg-white/35;
+        }
+        &::-webkit-scrollbar-track {
+            @apply bg-transparent rounded-xl;
+        }
+        scrollbar-width: auto;
+        scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+    }
+}
 
 @layer components {
     /* Article content heading margin adjustments */
@@ -158,7 +177,6 @@ body {
         }
 
         /* Style adjustments for lists */
-
         ul p, ol p {
             @apply !mb-0;
         }
@@ -185,20 +203,27 @@ body {
         }
 
         /* Code blocks */
-
         figure[data-rehype-pretty-code-figure] pre code {
-            @apply px-5 py-3.5 rounded-lg overflow-auto leading-snug;
+            @apply px-5 py-3.5 rounded-lg overflow-x-scroll leading-snug;
             counter-reset: line;
         }
 
         figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
             counter-increment: line;
             content: counter(line);
-            @apply inline-block w-6 mr-5 text-right text-gray-200;
+            @apply inline-block w-6 mr-6 text-right text-gray-200;
         }
 
-        p code {
+        code:not(figure[data-rehype-pretty-code-figure] pre code) {
             @apply relative bottom-[1px] px-1.5 pb-[2.5px] pt-[3.5px] rounded-md;
+        }
+
+        /* Equations */
+        span.katex-block {
+            @apply block text-center mx-auto my-3;
+        }
+        span.katex-inline {
+            @apply inline mx-1;
         }
     }
 }

@@ -1,6 +1,6 @@
 import {allPosts} from "content-collections";
 import React from "react";
-import Delimiter from "@/components/delimiter";
+import Delimiter from "@/components/ui/delimiter";
 import {cn} from "@/lib/utils";
 import {socialIcons} from "@/components/icons";
 import {config} from "@/config";

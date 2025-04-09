@@ -36,7 +36,7 @@ export default function CodeBlock({className, ...props}: React.HTMLAttributes<HT
 
     return (
         <div className={`relative group max-w-4xl`}>
-            <pre ref={preRef} className={cn("mb-4", className)} {...props} />
+            <pre ref={preRef} className={cn("mb-4 code-scrollbar", className)} {...props} />
             <button
                 className={`absolute cursor-pointer top-2 right-2 rounded-md border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200`}
                 onClick={copyToClipboard}

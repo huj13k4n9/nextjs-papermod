@@ -1,14 +1,15 @@
 import {cn, isInternalLink} from "@/lib/utils";
 import React from "react";
-import CodeBlock from "@/components/codeblock";
+import CodeBlock from "@/components/ui/codeblock";
 import Link from "next/link";
+import KaTeXWrapper from "@/components/ui/katex-wrapper";
 
 export const MDXComponents = {
     h1: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h1 className={cn("mt-8 mb-5 text-[34px] leading-snug tracking-tight font-semibold", className)} {...props} />
+        <h1 className={cn("mt-8 mb-5 text-[32px] leading-snug tracking-tight font-semibold", className)} {...props} />
     ),
     h2: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h2 className={cn("mt-7.5 mb-5 text-3xl leading-snug tracking-tight font-semibold", className)} {...props} />
+        <h2 className={cn("mt-7.5 mb-5 text-[28px] leading-snug tracking-tight font-semibold", className)} {...props} />
     ),
     h3: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h3 className={cn("mt-7 mb-4.5 text-2xl leading-snug tracking-tight font-semibold", className)} {...props} />
@@ -22,7 +23,7 @@ export const MDXComponents = {
     h6: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h6 className={cn("mt-5 mb-2 text-base leading-normal tracking-tight font-semibold", className)} {...props} />
     ),
-    p: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
+    p: ({className, ...props}: React.HTMLAttributes<HTMLParagraphElement>) => (
         <p className={cn("mb-4 text-base leading-normal", className)} {...props} />
     ),
     a: ({className, ...props}: React.HTMLAttributes<HTMLAnchorElement>) => {
@@ -36,12 +37,12 @@ export const MDXComponents = {
             />
         )
     },
-    Link: ({className, href, ...props}: React.AllHTMLAttributes<HTMLAnchorElement>) => {
+    Link: ({ className, href, ...props }: React.ComponentProps<typeof Link>) => {
         return (
             <Link
-                href={href || ""}
+                href={href}
                 className={cn("font-normal transition-all underline underline-offset-3", className)}
-                target={isInternalLink(href || "") ? "_self" : "_blank"} {...props}
+                target={isInternalLink(href.toString()) ? "_self" : "_blank"} {...props}
             />
         )
     },
@@ -53,7 +54,7 @@ export const MDXComponents = {
             />
         )
     },
-    hr: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
+    hr: ({className, ...props}: React.HTMLAttributes<HTMLHRElement>) => (
         <hr className={cn("my-5", className)} {...props}/>
     ),
     strong: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
@@ -62,7 +63,7 @@ export const MDXComponents = {
     em: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
         <em className={cn("italic", className)} {...props} />
     ),
-    blockquote: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
+    blockquote: ({className, ...props}: React.HTMLAttributes<HTMLQuoteElement>) => (
         <blockquote className={cn("my-3 px-4 pt-[5px] border-s-3", className)} {...props} />
     ),
     table: ({className, ...props}: React.HTMLAttributes<HTMLTableElement>) => (
@@ -101,13 +102,13 @@ export const MDXComponents = {
             {...props}
         />
     ),
-    ul: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
+    ul: ({className, ...props}: React.HTMLAttributes<HTMLUListElement>) => (
         <ul className={cn("ps-6 mb-4 list-disc", className)} {...props} />
     ),
-    ol: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
+    ol: ({className, ...props}: React.HTMLAttributes<HTMLOListElement>) => (
         <ol className={cn("ps-6 mb-4 list-decimal list-outside", className)} {...props} />
     ),
-    li: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
+    li: ({className, ...props}: React.HTMLAttributes<HTMLLIElement>) => (
         <li className={cn("my-1.5", className)} {...props} />
     ),
     pre: ({className, ...props}: React.HTMLAttributes<HTMLPreElement>) => (
@@ -127,4 +128,6 @@ export const MDXComponents = {
             {...props}
         />
     ),
+    span: ({className, ...props}: React.HTMLAttributes<HTMLSpanElement>) => (
+        <KaTeXWrapper className={className} {...props} />)
 }
