@@ -2,6 +2,7 @@ import {type ClassValue, clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
 import {markdownToTxt} from "markdown-to-txt";
 import count from 'word-count'
+import {config} from "@/config";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
@@ -23,4 +24,13 @@ export function getArticleAttrs(content: string): ArticleAttributes {
         wordCount: count(plainText),
         summary: summary
     };
+}
+
+export function isInternalLink(href: string): boolean {
+    if (!href) return true;
+    if (href.startsWith('#')) return true;
+    if (href.startsWith('/') && !href.startsWith('//')) return true;
+    if (!href.includes('://') && !href.startsWith('//')) return true;
+    if (href.includes(new URL(config.site.baseUrl).hostname)) return true;
+    return false;
 }

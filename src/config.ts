@@ -5,6 +5,8 @@ export const config = {
         description: "A Simple Next.js Blog Site",
         created: "01/01/1970 00:00:00",
         beian: "京 ICP备 12345678 号",
+        url: "http://localhost:3000",
+        baseUrl: "http://localhost:3000",
         favicon: "favicon.png",
         indexPage: {
             title: "Hi there 😝",
