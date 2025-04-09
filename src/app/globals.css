@@ -158,7 +158,8 @@ body {
         }
 
         /* Style adjustments for lists */
-        ul p, ol p{
+
+        ul p, ol p {
             @apply !mb-0;
         }
 
@@ -178,15 +179,18 @@ body {
         :is(dir, menu, ol, ul) ul {
             @apply !list-[circle];
         }
+
         :is(dir, menu, ol, ul) :is(dir, menu, ol, ul) ul {
             @apply !list-[square];
         }
 
         /* Code blocks */
-        figure[data-rehype-pretty-code-figure] pre code{
+
+        figure[data-rehype-pretty-code-figure] pre code {
             @apply px-5 py-3.5 rounded-lg overflow-auto leading-snug;
             counter-reset: line;
         }
+
         figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
             counter-increment: line;
             content: counter(line);

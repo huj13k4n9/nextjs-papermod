@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: config.site.title,
     description: config.site.description,
     referrer: "origin-when-cross-origin",
-    authors: [ {name: config.site.author} ],
+    authors: [{name: config.site.author}],
 };
 
 export default function RootLayout({children}: Readonly<{

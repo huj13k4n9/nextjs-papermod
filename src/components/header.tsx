@@ -23,12 +23,12 @@ export default function Header() {
     return (
         <header className="pt-4 pb-3 w-full">
             <motion.div className={"mx-auto px-8 w-full select-none"}
-                initial={{ maxWidth: "56rem" }}
-                animate={{ maxWidth: isBlogPage ? "72rem" : "56rem" }}
-                transition={{
-                    ...animateAttr,
-                    delay: 0.5,
-                }}
+                        initial={{maxWidth: "56rem"}}
+                        animate={{maxWidth: isBlogPage ? "72rem" : "56rem"}}
+                        transition={{
+                            ...animateAttr,
+                            delay: 0.5,
+                        }}
             >
                 <div className={cn(
                     `flex flex-col md:justify-between items-center`,

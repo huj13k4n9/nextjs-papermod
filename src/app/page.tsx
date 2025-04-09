@@ -29,7 +29,7 @@ function IndexBanner(): React.ReactElement {
                     return (
                         <div key={index} className="relative group">
                             <Link href={item.href === "" ? "#" : item.href} target="_blank"
-                               className={`[&>*]:w-7 [&>*]:h-7 block`}>
+                                  className={`[&>*]:w-7 [&>*]:h-7 block`}>
                                 <IconComponent/>
                             </Link>
                             <div
@@ -110,20 +110,21 @@ export default async function Home({searchParams}: {
             {pageCount > 1 &&
                 <div className={`flex flex-row justify-between pt-5`}>
                     <Link href={`/?page=${currentPage - 1}`}
-                       className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === 1 ? "invisible" : "")}
-                       title="Go to previous page"
+                          className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === 1 ? "invisible" : "")}
+                          title="Go to previous page"
                     >
                         <LuChevronLeft/>
                         <span>Previous</span>
                     </Link>
                     <div className={`inline-flex flex-row items-center justify-center`}>
-                        {currentPage - 1 > 0 ? <PaginationNumber page={currentPage - 1}/> : <PaginationPlaceholder />}
+                        {currentPage - 1 > 0 ? <PaginationNumber page={currentPage - 1}/> : <PaginationPlaceholder/>}
                         <PaginationNumber page={currentPage}/>
-                        {currentPage + 1 <= pageCount ? <PaginationNumber page={currentPage + 1}/> : <PaginationPlaceholder />}
+                        {currentPage + 1 <= pageCount ? <PaginationNumber page={currentPage + 1}/> :
+                            <PaginationPlaceholder/>}
                     </div>
                     <Link href={`/?page=${currentPage + 1}`}
-                       className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === pageCount ? "invisible" : "")}
-                       title="Go to next page"
+                          className={cn(`inline-flex items-center justify-center rounded-md text-sm`, currentPage === pageCount ? "invisible" : "")}
+                          title="Go to next page"
                     >
                         <span>Next</span>
                         <LuChevronRight/>
