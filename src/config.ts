@@ -33,6 +33,7 @@ export const config = {
         nav: {
             showIcon: true,
             showTitle: true,
+            float: false,
             icon: "/favicon.png",
             entries: [
                 {href: '/', label: 'Home', icon: "🏠"},

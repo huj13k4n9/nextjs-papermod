@@ -21,10 +21,13 @@ export default function Header() {
     const isBlogPage = currentPath.includes("/article/");
 
     return (
-        <header className="pt-4 pb-3 w-full">
+        <header className={cn(
+            "pt-4 pb-3 w-full bg-transparent backdrop-blur-lg",
+            navAttrs.float && "fixed top-0 left-0 right-0 z-20 border-b-[1.5px]"
+        )}>
             <motion.div className={"mx-auto px-8 w-full select-none"}
-                        initial={{maxWidth: "56rem"}}
-                        animate={{maxWidth: isBlogPage ? "72rem" : "56rem"}}
+                        initial={{maxWidth: "56rem", y: 0}}
+                        animate={{maxWidth: isBlogPage ? "72rem" : "56rem", y: 0}}
                         transition={{
                             ...animateAttr,
                             delay: 0.5,
@@ -97,7 +100,7 @@ export default function Header() {
                                         </div>
                                         {currentPath === link.href && (
                                             <motion.div
-                                                className={`absolute inset-0 bg-[#ffffff33] rounded-md -z-10 -ml-1.5 -mr-2.5 -my-0.5`}
+                                                className={`absolute inset-0 bg-[#ffffff33] rounded-md -z-10 -ml-1.5 -mr-2 -my-0.5`}
                                                 layoutId="underline"
                                                 transition={{
                                                     ...animateAttr,
