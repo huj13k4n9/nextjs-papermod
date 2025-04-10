@@ -29,7 +29,7 @@ function IndexBanner(): React.ReactElement {
                     return (
                         <div key={index} className="relative group">
                             <Link href={item.href === "" ? "#" : item.href} target="_blank"
-                                  className={`[&>*]:w-7 [&>*]:h-7 block`}>
+                                  className={`[&>svg]:w-7 [&>svg]:h-7 block`}>
                                 <IconComponent/>
                             </Link>
                             <div

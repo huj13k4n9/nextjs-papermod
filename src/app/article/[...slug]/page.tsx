@@ -11,6 +11,7 @@ import React from "react";
 import 'katex/dist/katex.min.css';
 // @ts-ignore
 import type {SerializeOptions} from "next-mdx-remote/dist/types";
+import Breadcrumb from "@/components/ui/breadcrumb";
 
 const options: SerializeOptions = {
     mdxOptions: {
@@ -50,8 +51,9 @@ export default async function BlogArticlePage({params}: {
 
     return (
         <div className={`flex flex-col`}>
-            <div className={`flex flex-col w-full mt-8 mb-12`}>
-                <h1 className={`text-4xl font-bold mb-1.5`}>{blog.title}</h1>
+            <div className={`flex flex-col w-full mt-5 mb-8`}>
+                <Breadcrumb items={[ {index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`} ]}/>
+                <h1 className={`text-[40px] font-bold mb-0`}>{blog.title}</h1>
                 <h2 className="text-sm">
                     {blog.date.getFullYear()} 年 {blog.date.getMonth() + 1} 月 {blog.date.getDate()} 日
                     <Delimiter/>
