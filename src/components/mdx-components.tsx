@@ -37,7 +37,7 @@ export const MDXComponents = {
             />
         )
     },
-    Link: ({ className, href, ...props }: React.ComponentProps<typeof Link>) => {
+    Link: ({className, href, ...props}: React.ComponentProps<typeof Link>) => {
         return (
             <Link
                 href={href}
