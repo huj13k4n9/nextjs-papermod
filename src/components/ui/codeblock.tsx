@@ -7,24 +7,29 @@ import {AnimatePresence, motion} from "motion/react";
 
 export default function CodeBlock({className, ...props}: React.HTMLAttributes<HTMLPreElement>) {
     const [copied, setCopied] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const preRef = React.useRef<HTMLPreElement>(null);
 
     const copyToClipboard = async () => {
         const codeContent = preRef.current?.innerText || '';
 
-        if (!navigator.clipboard) { // HTTPS only
+        if (!navigator.clipboard) {
             const textArea = document.createElement('textarea');
             textArea.value = codeContent;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-        } else {  // Backup
+        } else {
             await navigator.clipboard.writeText(codeContent);
         }
 
         setCopied(true);
-        setTimeout(() => setCopied(false), 2e3);
+        setIsHovered(true); // 强制保持可见状态
+        setTimeout(() => {
+            setCopied(false);
+            setIsHovered(false); // 2秒后恢复
+        }, 1500);
     };
 
     const animationParams = {
@@ -38,19 +43,23 @@ export default function CodeBlock({className, ...props}: React.HTMLAttributes<HT
         <div className={`relative group max-w-4xl`}>
             <pre ref={preRef} className={cn("mb-4 code-scrollbar", className)} {...props} />
             <button
-                className={`absolute cursor-pointer top-2 right-2 rounded-md border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200`}
+                className={`absolute cursor-pointer top-2 right-2 rounded-md border-2 ${
+                    isHovered || copied ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                } transition-opacity duration-200`}
                 onClick={copyToClipboard}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
             >
                 <AnimatePresence mode="wait">
                     {copied ? (
                         <motion.div
-                            className={`px-2 py-2 w-10 h-10 [&>*]:w-5 [&>*]:h-5 flex items-center justify-center`}
+                            className={`px-2 py-2 w-8 h-8 flex items-center justify-center`}
                             key="check" {...animationParams}>
                             <LuCheckCheck/>
                         </motion.div>
                     ) : (
                         <motion.div
-                            className={`px-2 py-2 w-10 h-10 [&>*]:w-5 [&>*]:h-5 flex items-center justify-center`}
+                            className={`px-2 py-2 w-8 h-8 flex items-center justify-center`}
                             key="copy" {...animationParams}>
                             <LuCopy/>
                         </motion.div>

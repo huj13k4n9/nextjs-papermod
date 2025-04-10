@@ -130,7 +130,7 @@ body {
     /* Scrollbar for code blocks */
     .code-scrollbar code {
         &::-webkit-scrollbar {
-            @apply h-4 bg-transparent;
+            @apply h-1.5 bg-transparent;
         }
         &::-webkit-scrollbar-thumb {
             @apply bg-white/25 rounded-xl;
@@ -141,7 +141,7 @@ body {
         &::-webkit-scrollbar-track {
             @apply bg-transparent rounded-xl;
         }
-        scrollbar-width: auto;
+        scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
     }
 }
@@ -202,9 +202,13 @@ body {
             @apply !list-[square];
         }
 
+        ul.contains-task-list {
+            @apply !list-none !ps-1.5;
+        }
+
         /* Code blocks */
         figure[data-rehype-pretty-code-figure] pre code {
-            @apply px-5 py-3.5 rounded-lg overflow-x-scroll leading-snug;
+            @apply px-5 py-3.5 rounded-lg overflow-x-scroll leading-normal;
             counter-reset: line;
         }
 

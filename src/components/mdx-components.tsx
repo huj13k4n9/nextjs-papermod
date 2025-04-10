@@ -116,7 +116,7 @@ export const MDXComponents = {
     code: ({className, ...props}: React.HTMLAttributes<HTMLElement>) => (
         <code
             className={cn(
-                "bg-white/20 text-base",
+                "bg-white/20 text-sm",
                 className
             )}
             {...props}
