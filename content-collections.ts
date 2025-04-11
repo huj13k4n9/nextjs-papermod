@@ -15,7 +15,7 @@ const posts = defineCollection({
             ...data,
             wordCount,
             summary,
-            uri: "/article/" + data._meta.path,
+            slug: data._meta.path.replaceAll('\\', '/'),
             date: new Date(data.date),
         };
     },

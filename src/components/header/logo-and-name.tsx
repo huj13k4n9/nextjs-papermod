@@ -14,7 +14,7 @@ export default function LogoAndName() {
             type="button"
             layout
             whileTap={{ scale: 0.9 }}
-            transition={{ ease: "easeInOut", duration: 0.1 }}
+            transition={{ ease: "easeIn", duration: 0.1 }}
         >
             <Link href="/" className="flex items-center mb-4 md:mb-0">
                 {navAttrs.showIcon && (

@@ -1,6 +1,7 @@
-import {allPosts} from "content-collections";
+import {allPosts, Post} from "content-collections";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {MDXComponents} from "@/components/mdx-components";
+import { notFound } from 'next/navigation'
 import Delimiter from "@/components/ui/delimiter";
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
@@ -12,6 +13,7 @@ import 'katex/dist/katex.min.css';
 // @ts-ignore
 import type {SerializeOptions} from "next-mdx-remote/dist/types";
 import Breadcrumb from "@/components/ui/breadcrumb";
+import ArticleAttributes from "@/components/ui/article-attr";
 
 const options: SerializeOptions = {
     mdxOptions: {
@@ -30,7 +32,7 @@ const options: SerializeOptions = {
 
 async function getBlogsFromParams(slugs: string[]) {
     const slug = slugs?.join("/") || ""
-    const blog = allPosts.find((blog: any) => blog._meta.path === slug)
+    const blog = allPosts.find((blog: Post) => blog.slug === slug);
 
     if (!blog) {
         return null
@@ -46,19 +48,15 @@ export default async function BlogArticlePage({params}: {
     const blog = await getBlogsFromParams(slug)
 
     if (!blog) {
-        return <div>404</div>
+        notFound();
     }
 
     return (
         <div className={`flex flex-col`}>
             <div className={`flex flex-col w-full mt-5 mb-8`}>
                 <Breadcrumb items={[ {index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`} ]}/>
-                <h1 className={`text-[40px] font-bold mb-0`}>{blog.title}</h1>
-                <h2 className="text-[15px]">
-                    {blog.date.getFullYear()} 年 {blog.date.getMonth() + 1} 月 {blog.date.getDate()} 日
-                    <Delimiter/>
-                    {blog.wordCount} 字
-                </h2>
+                <h1 className={`text-[42px] font-bold mb-0`}>{blog.title}</h1>
+                <ArticleAttributes date={blog.date} wordCount={blog.wordCount} className="text-[15px]" />
             </div>
             <div className={`article-content`}>
                 <MDXRemote source={blog.content} components={MDXComponents} options={options}/>

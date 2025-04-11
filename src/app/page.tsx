@@ -2,12 +2,13 @@ import {allPosts} from "content-collections";
 import React from "react";
 import Delimiter from "@/components/ui/delimiter";
 import {cn} from "@/lib/utils";
-import {socialIcons} from "@/components/icons";
+import {socialIcons} from "@/components/social-icons";
 import {config} from "@/config";
 import {PaginationNumber, PaginationPlaceholder} from "@/components/ui/pagination";
 import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 import {redirect} from "next/navigation";
 import Link from "next/link";
+import ArticleAttributes from "@/components/ui/article-attr";
 
 interface ArticleProps {
     title: string;
@@ -21,7 +22,7 @@ function IndexBanner(): React.ReactElement {
     const indexBannerConfig = config.site.indexPage;
     return (
         <>
-            <h1 className={`text-[40px] font-bold`}>{indexBannerConfig.title}</h1>
+            <h1 className={`text-[42px] font-bold`}>{indexBannerConfig.title}</h1>
             <h3 className={`text-lg mt-2 mb-4`}>{indexBannerConfig.subtitle}</h3>
             <div className={`flex flex-row flex-wrap gap-3 py-3`}>
                 {indexBannerConfig.socialLinks.map((item, index) => {
@@ -54,19 +55,11 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
         <article>
             <Link href={ap.uri} className="flex flex-col space-y-3 p-6 border-1 rounded-2xl">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                    <h2 className="font-bold text-2xl">{ap.title}</h2>
-                    <h2 className="hidden sm:block text-[15px]">
-                        {ap.date.getFullYear()} 年 {ap.date.getMonth() + 1} 月 {ap.date.getDate()} 日
-                        <Delimiter/>
-                        {ap.wordCount} 字
-                    </h2>
+                    <h2 className="font-bold text-2xl line-clamp-1 sm:max-w-[60%]">{ap.title}</h2>
+                    <ArticleAttributes date={ap.date} wordCount={ap.wordCount} className="hidden sm:block text-[15px]" />
                 </div>
                 <p className="line-clamp-2 text-base leading-relaxed sm:mb-0">{ap.summary}</p>
-                <h2 className="sm:hidden text-[15px]">
-                    {ap.date.getFullYear()} 年 {ap.date.getMonth() + 1} 月 {ap.date.getDate()} 日
-                    <Delimiter/>
-                    {ap.wordCount} 字
-                </h2>
+                <ArticleAttributes date={ap.date} wordCount={ap.wordCount} className="sm:hidden text-[15px]" />
             </Link>
         </article>
     )
@@ -98,11 +91,11 @@ export default async function Home({searchParams}: {
             <div className="space-y-6">
                 {currentPageArticles.map((article) => (
                     <ArticlePreview
-                        key={article.uri}
+                        key={article.slug}
                         title={article.title}
                         date={article.date}
                         summary={article.summary}
-                        uri={article.uri}
+                        uri={`/article/${article.slug}`}
                         wordCount={article.wordCount}
                     />
                 ))}

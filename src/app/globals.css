@@ -127,26 +127,14 @@ body {
 }
 
 @layer utilities {
-    /* Scrollbar for code blocks */
+    /* Scrollbar */
     .code-scrollbar code {
-        &::-webkit-scrollbar {
-            @apply h-1.5 bg-transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            @apply bg-white/25 rounded-xl;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            @apply bg-white/35;
-        }
-
-        &::-webkit-scrollbar-track {
-            @apply bg-transparent rounded-xl;
-        }
-
         scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+    }
+
+    html {
+        scrollbar-width: none;
     }
 }
 
