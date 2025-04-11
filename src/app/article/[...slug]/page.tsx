@@ -54,7 +54,7 @@ export default async function BlogArticlePage({params}: {
             <div className={`flex flex-col w-full mt-5 mb-8`}>
                 <Breadcrumb items={[ {index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`} ]}/>
                 <h1 className={`text-[40px] font-bold mb-0`}>{blog.title}</h1>
-                <h2 className="text-sm">
+                <h2 className="text-[15px]">
                     {blog.date.getFullYear()} 年 {blog.date.getMonth() + 1} 月 {blog.date.getDate()} 日
                     <Delimiter/>
                     {blog.wordCount} 字

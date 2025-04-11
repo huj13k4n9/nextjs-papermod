@@ -70,7 +70,7 @@ export const MDXComponents = {
         <div className="max-w-4xl mt-2 mb-4 overflow-x-auto">
             <table
                 className={cn(
-                    "mx-auto mb-4 border-collapse border-spacing-0 text-left",
+                    "mx-auto mb-4 border-collapse border-spacing-0 text-left w-[80%]",
                     "text-[1.1rem]",
                     className
                 )}
@@ -87,7 +87,7 @@ export const MDXComponents = {
     th: ({className, ...props}: React.HTMLAttributes<HTMLTableCellElement>) => (
         <th
             className={cn(
-                "border-b border-solid px-4 py-2 text-left font-semibold",
+                "border-y border-solid px-4 py-2 text-left font-semibold",
                 className
             )}
             {...props}

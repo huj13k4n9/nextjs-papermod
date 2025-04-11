@@ -25,7 +25,7 @@ export default function Background({children}: { children: ReactNode }) {
     };
 
     return (
-        <div className="relative w-full min-h-screen">
+        <div className="relative w-full min-h-max">
             <div
                 className={cn(
                     'absolute inset-0 w-full h-full z-0',
@@ -47,7 +47,7 @@ export default function Background({children}: { children: ReactNode }) {
                 />
             )}
 
-            <div className="relative z-10 w-full min-h-screen">
+            <div className="relative z-10 w-full min-h-max">
                 {children}
             </div>
         </div>
