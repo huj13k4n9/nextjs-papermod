@@ -3,7 +3,7 @@ import "./globals.css";
 import React from "react";
 import {config} from "@/config";
 import Footer from "@/components/footer";
-import Header from "@/components/header";
+import Header from "@/components/header/header";
 import Background from "@/components/background";
 import {cn} from "@/lib/utils";
 
