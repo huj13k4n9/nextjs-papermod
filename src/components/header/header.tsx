@@ -32,14 +32,14 @@ export default function Header() {
                 transition={{...animateAttr, delay: 0.4}}
                 // Fixed scroll problem of animated elements from
                 // https://github.com/motiondivision/motion/issues/1535#issuecomment-1952964188
-                style={{ originY: 'top' }}
+                style={{originY: 'top'}}
             >
                 <nav className={cn(
                     `flex flex-col md:justify-between items-center`,
                     (navAttrs.showIcon || navAttrs.showSiteName) && `md:flex-row`
                 )}>
-                    {(navAttrs.showIcon || navAttrs.showSiteName) && <LogoAndName />}
-                    <NavBar currentPath={currentPath} />
+                    {(navAttrs.showIcon || navAttrs.showSiteName) && <LogoAndName/>}
+                    <NavBar currentPath={currentPath}/>
                 </nav>
             </motion.div>
         </header>

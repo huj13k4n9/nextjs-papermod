@@ -1,4 +1,4 @@
-import { defineCollection, defineConfig } from "@content-collections/core";
+import {defineCollection, defineConfig} from "@content-collections/core";
 import {getArticleAttrs} from "@/lib/utils";
 
 const posts = defineCollection({

@@ -15,9 +15,9 @@ type YearMonthPosts = {
 function monthToText(month: number): string {
     // @ts-ignore
     return {
-        1: "Jan.",  2: "Feb.",  3: "Mar.",
-        4: "Apr.",  5: "May.",  6: "Jun.",
-        7: "Jul.",  8: "Aug.",  9: "Sept.",
+        1: "Jan.", 2: "Feb.", 3: "Mar.",
+        4: "Apr.", 5: "May.", 6: "Jun.",
+        7: "Jul.", 8: "Aug.", 9: "Sept.",
         10: "Oct.", 11: "Nov.", 12: "Dec.",
     }[month];
 }
@@ -80,12 +80,16 @@ export default function Articles() {
                     <li className="mb-8 mt-7 relative ps-6 ms-2 md:ms-4" key={yearData.year}>
                         <div className="absolute top-[1em] -left-[3px] rounded-full w-[13px] h-[6px] bg-white"></div>
                         <div className="absolute top-[1em] bottom-0 left-0 border-s-2"
-                             style={{ borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff33, transparent)', borderImageSlice: '1' }} />
+                             style={{
+                                 borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff33, transparent)',
+                                 borderImageSlice: '1'
+                             }}/>
                         <h2 className="text-3xl font-semibold mb-3">
                             {yearData.year}
                         </h2>
                         {yearData.months.map((monthData) => (
-                            <div key={`${yearData.year}${monthData.month}`} className="flex sm:flex-row flex-col items-start justify-start py-4 ps-[2px]">
+                            <div key={`${yearData.year}${monthData.month}`}
+                                 className="flex sm:flex-row flex-col items-start justify-start py-4 ps-[2px]">
                                 <h2 className="text-2xl font-semibold mr-6 mt-2 mb-5 min-w-28">
                                     {monthToText(monthData.month)} {monthData.posts.length}
                                 </h2>
@@ -98,7 +102,8 @@ export default function Articles() {
                                             className="flex flex-col items-start justify-center space-y-0.5"
                                         >
                                             <span className={`text-xl`}>{post.title}</span>
-                                            <ArticleAttributes date={post.date} wordCount={post.wordCount} className="text-[15px]" />
+                                            <ArticleAttributes date={post.date} wordCount={post.wordCount}
+                                                               className="text-[15px]"/>
                                         </Link>
                                     ))}
                                 </div>

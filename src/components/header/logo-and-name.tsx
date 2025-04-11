@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { config } from "@/config";
+import {config} from "@/config";
 import * as motion from "motion/react-client";
 
 export default function LogoAndName() {
@@ -13,8 +13,8 @@ export default function LogoAndName() {
         <motion.button
             type="button"
             layout
-            whileTap={{ scale: 0.9 }}
-            transition={{ ease: "easeIn", duration: 0.1 }}
+            whileTap={{scale: 0.9}}
+            transition={{ease: "easeIn", duration: 0.1}}
         >
             <Link href="/" className="flex items-center mb-4 md:mb-0">
                 {navAttrs.showIcon && (

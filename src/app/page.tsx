@@ -1,6 +1,5 @@
 import {allPosts} from "content-collections";
 import React from "react";
-import Delimiter from "@/components/ui/delimiter";
 import {cn} from "@/lib/utils";
 import {socialIcons} from "@/components/social-icons";
 import {config} from "@/config";
@@ -56,10 +55,10 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
             <Link href={ap.uri} className="flex flex-col space-y-3 p-6 border-1 rounded-2xl">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <h2 className="font-bold text-2xl line-clamp-1 sm:max-w-[60%]">{ap.title}</h2>
-                    <ArticleAttributes date={ap.date} wordCount={ap.wordCount} className="hidden sm:block text-[15px]" />
+                    <ArticleAttributes date={ap.date} wordCount={ap.wordCount} className="hidden sm:block text-[15px]"/>
                 </div>
                 <p className="line-clamp-2 text-base leading-relaxed sm:mb-0">{ap.summary}</p>
-                <ArticleAttributes date={ap.date} wordCount={ap.wordCount} className="sm:hidden text-[15px]" />
+                <ArticleAttributes date={ap.date} wordCount={ap.wordCount} className="sm:hidden text-[15px]"/>
             </Link>
         </article>
     )

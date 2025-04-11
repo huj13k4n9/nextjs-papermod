@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
-import { withContentCollections } from "@content-collections/next";
+import type {NextConfig} from "next";
+import {withContentCollections} from "@content-collections/next";
 import createMDX from '@next/mdx'
 
 /** @type {import('next').NextConfig} */

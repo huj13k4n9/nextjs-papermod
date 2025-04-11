@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { config } from "@/config";
-import { cn } from "@/lib/utils";
+import {config} from "@/config";
+import {cn} from "@/lib/utils";
 import * as motion from "motion/react-client";
-import { AnimatePresence } from "motion/react";
-import { animateAttr } from './header';
+import {AnimatePresence} from "motion/react";
+import {animateAttr} from './header';
 
 type NavBarProps = {
     currentPath: string;
@@ -23,7 +23,7 @@ type NavLinkProps = {
 
 const navAttrs = config.site.nav;
 
-function NavLink({ link, currentPath }: NavLinkProps) {
+function NavLink({link, currentPath}: NavLinkProps) {
     const getLinkLabelStyle = (href: string) => {
         switch (navAttrs.showLinkLabel) {
             case "true":
@@ -46,7 +46,7 @@ function NavLink({ link, currentPath }: NavLinkProps) {
                 <motion.button
                     type="button"
                     className="cursor-pointer flex items-center justify-center min-h-[28px] min-w-[24px]"
-                    whileTap={{ scale: 0.9 }}
+                    whileTap={{scale: 0.9}}
                 >
                     <motion.span
                         layout
@@ -58,13 +58,13 @@ function NavLink({ link, currentPath }: NavLinkProps) {
                     <AnimatePresence mode="wait" initial={false}>
                         <motion.span
                             key={link.href}
-                            initial={{ opacity: 0, width: 0 }}
-                            animate={{ opacity: 1, width: "auto" }}
-                            exit={{ opacity: 0, width: 0 }}
+                            initial={{opacity: 0, width: 0}}
+                            animate={{opacity: 1, width: "auto"}}
+                            exit={{opacity: 0, width: 0}}
                             transition={{
                                 ...animateAttr,
-                                opacity: { duration: 0.5 },
-                                width: { duration: 0.5 },
+                                opacity: {duration: 0.5},
+                                width: {duration: 0.5},
                             }}
                             className={cn(
                                 "text-[15px] font-bold overflow-hidden ml-1",
@@ -76,12 +76,12 @@ function NavLink({ link, currentPath }: NavLinkProps) {
 
                         {currentPath === link.href && (
                             <motion.div
-                                style={{ borderRadius: "8px" }}
+                                style={{borderRadius: "8px"}}
                                 className="absolute inset-0 bg-[#ffffff33] rounded-xl -z-10 -ml-2 -mr-2 -my-0.5"
                                 layoutId="navlinks"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                exit={{opacity: 0}}
                                 transition={{
                                     ...animateAttr,
                                     duration: 0.5
@@ -95,13 +95,13 @@ function NavLink({ link, currentPath }: NavLinkProps) {
     );
 }
 
-export default function NavBar({ currentPath }: NavBarProps) {
+export default function NavBar({currentPath}: NavBarProps) {
     return (
         <div>
             <motion.ul
                 className="flex space-x-6 list-none w-full"
                 layout
-                transition={{ ...animateAttr }}
+                transition={{...animateAttr}}
             >
                 {navAttrs.entries.map((link, index) => (
                     <NavLink

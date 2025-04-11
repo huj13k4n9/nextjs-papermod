@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import {LuChevronsRight } from "react-icons/lu";
+import {LuChevronsRight} from "react-icons/lu";
 import {cn} from "@/lib/utils";
 
 interface BreadcrumbItem {
@@ -12,7 +12,9 @@ interface BreadcrumbItem {
 export default function Breadcrumb({items}: {
     items: BreadcrumbItem[];
 }) {
-    const sortedItems = items.sort((a, b) => {return a.index - b.index})
+    const sortedItems = items.sort((a, b) => {
+        return a.index - b.index
+    })
     return (
         <div
             className={cn(
@@ -26,7 +28,7 @@ export default function Breadcrumb({items}: {
                     <Link href={item.href}>{item.text}</Link>
                 </React.Fragment>
             ))}
-            <LuChevronsRight />
+            <LuChevronsRight/>
         </div>
     )
 }
