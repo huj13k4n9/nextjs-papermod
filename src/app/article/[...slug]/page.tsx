@@ -56,7 +56,7 @@ export default async function BlogArticlePage({params}: {
                 <Breadcrumb
                     items={[{index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`}]}/>
                 <h1 className={`text-[42px] font-bold mb-0`}>{blog.title}</h1>
-                <ArticleAttributes date={blog.date} wordCount={blog.wordCount} className="text-[15px]"/>
+                <ArticleAttributes date={blog.date} wordCount={blog.wordCount} showReadingTime={true} className="text-[15px]"/>
             </div>
             <div className={`article-content`}>
                 <MDXRemote source={blog.content} components={MDXComponents} options={options}/>

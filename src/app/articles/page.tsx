@@ -77,11 +77,11 @@ export default function Articles() {
 
             <ol className={`w-full`}>
                 {organizedPosts.map((yearData) => (
-                    <li className="mb-8 mt-7 relative ps-6 ms-2 md:ms-4" key={yearData.year}>
-                        <div className="absolute top-[1em] -left-[3px] rounded-full w-[13px] h-[6px] bg-white"></div>
-                        <div className="absolute top-[1em] bottom-0 left-0 border-s-2"
+                    <li className="mb-8 mt-7 relative ps-6 md:ps-7 ms-1 md:ms-4" key={yearData.year}>
+                        <div className="absolute top-[13px] -left-[5px] rounded-full w-[12px] h-[12px] bg-white ring-white/40 ring-4"></div>
+                        <div className="absolute top-[29px] bottom-0 left-0 border-s-2"
                              style={{
-                                 borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff33, transparent)',
+                                 borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff33, #ffffff22, transparent)',
                                  borderImageSlice: '1'
                              }}/>
                         <h2 className="text-3xl font-semibold mb-3">
@@ -90,19 +90,19 @@ export default function Articles() {
                         {yearData.months.map((monthData) => (
                             <div key={`${yearData.year}${monthData.month}`}
                                  className="flex sm:flex-row flex-col items-start justify-start py-4 ps-[2px]">
-                                <h2 className="text-2xl font-semibold mr-6 mt-2 mb-5 min-w-28">
-                                    {monthToText(monthData.month)} {monthData.posts.length}
+                                <h2 className="text-2xl font-semibold mr-3 mt-2 mb-6 min-w-28">
+                                    {monthToText(monthData.month)} <sup>{monthData.posts.length}</sup>
                                 </h2>
 
-                                <div className="space-y-6">
+                                <div className="space-y-6 md:space-y-7">
                                     {monthData.posts.map((post, postIndex) => (
                                         <Link
                                             href={`/article/${post.slug}`}
                                             key={`${yearData.year}${monthData.month}${postIndex}`}
-                                            className="flex flex-col items-start justify-center space-y-0.5"
+                                            className="flex flex-col items-start justify-center space-y-1"
                                         >
                                             <span className={`text-xl`}>{post.title}</span>
-                                            <ArticleAttributes date={post.date} wordCount={post.wordCount}
+                                            <ArticleAttributes date={post.date} wordCount={post.wordCount} showReadingTime={false}
                                                                className="text-[15px]"/>
                                         </Link>
                                     ))}

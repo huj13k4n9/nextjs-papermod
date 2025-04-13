@@ -8,7 +8,7 @@ export default function KaTeXWrapper({className, ...props}: React.HTMLAttributes
     if (preRef.current?.className && preRef.current.className.trim() === "katex") {
         return (
             <span ref={preRef} className={cn(
-                preRef.current.parentElement.innerText.replace(preRef.current.innerText, "") !== "" ? "katex-inline" : "katex-block",
+                preRef.current.parentElement?.innerText.replace(preRef.current.innerText, "") !== "" ? "katex-inline" : "katex-block",
                 className)} {...props}
             />
         )
