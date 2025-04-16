@@ -34,7 +34,7 @@ export const config = {
             showIcon: true,
             showSiteName: true,
             // true | false | current
-            showLinkLabel: "true",
+            showLinkLabel: "current",
             float: true,
             icon: "/favicon.png",
             entries: [

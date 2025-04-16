@@ -18,7 +18,7 @@ export function getArticleAttrs(content: string): ArticleAttributes {
     const summary = markdownToTxt(content
         .replaceAll(/^#{1,6} +.*\n*/gm, ""))
         .replaceAll(/\n+/gm, "\n")
-        .substring(0, 500);
+        .substring(0, 300);
 
     return {
         wordCount: count(plainText),

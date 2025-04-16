@@ -84,26 +84,26 @@ export default function Articles() {
                                  borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff33, #ffffff22, transparent)',
                                  borderImageSlice: '1'
                              }}/>
-                        <h2 className="text-3xl font-semibold mb-3">
+                        <h2 className="text-4xl font-semibold mb-3">
                             {yearData.year}
                         </h2>
                         {yearData.months.map((monthData) => (
                             <div key={`${yearData.year}${monthData.month}`}
                                  className="flex sm:flex-row flex-col items-start justify-start py-4 ps-[2px]">
                                 <h2 className="text-2xl font-semibold mr-3 mt-2 mb-6 min-w-28">
-                                    {monthToText(monthData.month)} <sup>{monthData.posts.length}</sup>
+                                    {monthToText(monthData.month)} <sup className={`text-[15px] rounded-md bg-white text-black px-1.5 py-[1px]`}>{monthData.posts.length}</sup>
                                 </h2>
 
-                                <div className="space-y-6 md:space-y-7">
+                                <div className="space-y-6">
                                     {monthData.posts.map((post, postIndex) => (
                                         <Link
                                             href={`/article/${post.slug}`}
                                             key={`${yearData.year}${monthData.month}${postIndex}`}
                                             className="flex flex-col items-start justify-center space-y-1"
                                         >
-                                            <span className={`text-xl`}>{post.title}</span>
+                                            <span className={`text-xl font-semibold`}>{post.title}</span>
                                             <ArticleAttributes date={post.date} wordCount={post.wordCount} showReadingTime={false}
-                                                               className="text-[15px]"/>
+                                                               className="text-sm"/>
                                         </Link>
                                     ))}
                                 </div>
