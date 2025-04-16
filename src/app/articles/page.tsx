@@ -81,28 +81,34 @@ export default function Articles() {
                         <div className="absolute top-[13px] -left-[5px] rounded-full w-[12px] h-[12px] bg-white ring-white/40 ring-4"></div>
                         <div className="absolute top-[29px] bottom-0 left-0 border-s-2"
                              style={{
-                                 borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff33, #ffffff22, transparent)',
+                                 borderImageSource: 'linear-gradient(to bottom, #ffffff55, #ffffff11 95%, transparent)',
                                  borderImageSlice: '1'
                              }}/>
-                        <h2 className="text-4xl font-semibold mb-3">
+                        <h2 className="text-4xl font-semibold">
                             {yearData.year}
                         </h2>
                         {yearData.months.map((monthData) => (
                             <div key={`${yearData.year}${monthData.month}`}
-                                 className="flex sm:flex-row flex-col items-start justify-start py-4 ps-[2px]">
-                                <h2 className="text-2xl font-semibold mr-3 mt-2 mb-6 min-w-28">
+                                 className="flex sm:flex-row flex-col items-start justify-start pt-4 sm:pt-8 ps-[2px]">
+                                <div className="absolute -left-[3.1px] mt-[32.5px] rounded-full w-[8px] h-[8px] bg-white ring-white/40 ring-2"></div>
+                                <div className="absolute left-0 mt-[36px] border-t-2 w-[30px]"
+                                     style={{
+                                         borderImageSource: 'linear-gradient(to right, #ffffff55, transparent)',
+                                         borderImageSlice: '1'
+                                     }}/>
+                                <h2 className="text-2xl font-semibold mt-5 mb-6 min-w-28">
                                     {monthToText(monthData.month)} <sup className={`text-[15px] rounded-md bg-white text-black px-1.5 py-[1px]`}>{monthData.posts.length}</sup>
                                 </h2>
 
-                                <div className="space-y-6">
+                                <div className="space-y-4 w-full">
                                     {monthData.posts.map((post, postIndex) => (
                                         <Link
                                             href={`/article/${post.slug}`}
                                             key={`${yearData.year}${monthData.month}${postIndex}`}
-                                            className="flex flex-col items-start justify-center space-y-1"
+                                            className="flex flex-col flex-wrap items-start justify-center space-y-1 border-1 rounded-2xl px-4 py-3"
                                         >
                                             <span className={`text-xl font-semibold`}>{post.title}</span>
-                                            <ArticleAttributes date={post.date} wordCount={post.wordCount} showReadingTime={false}
+                                            <ArticleAttributes date={post.date} wordCount={post.wordCount} showReadingTime={true}
                                                                className="text-sm"/>
                                         </Link>
                                     ))}
