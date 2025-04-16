@@ -129,8 +129,27 @@ body {
 @layer utilities {
     /* Scrollbar */
     .code-scrollbar code {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar {
+            background: transparent;
+            height: 16px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #ffffff33;
+            background-clip: content-box;
+            border: 6px solid transparent;
+            border-radius: 15px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #ffffff88;
+            background-clip: content-box;
+            border-radius: 15px;
+        }
     }
 
     html {
@@ -202,7 +221,7 @@ body {
         /* Code blocks */
 
         figure[data-rehype-pretty-code-figure] pre code {
-            @apply px-5 py-3.5 rounded-lg overflow-x-scroll leading-normal;
+            @apply px-5 pt-3.5 pb-0 rounded-md overflow-x-scroll leading-normal;
             counter-reset: line;
         }
 
