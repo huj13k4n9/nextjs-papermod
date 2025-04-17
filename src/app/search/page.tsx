@@ -1,47 +1,64 @@
 "use client"
 
-import React, {ChangeEvent, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {LuSearch} from "react-icons/lu";
-import {searchArticles} from "@/lib/search";
-import {cn} from "@/lib/utils";
+import {searchArticles, SearchResult} from "@/lib/search";
+import Link from "next/link";
 
-function highlightedText({content, indexes}: {content: string, indexes: [number, number][]}) {
-    if (!indexes.length) return <>{content}</>;
+function highlightedText({text, index}: { text: string, index: [number, number][] }) {
+    if (!index.length) return <>{text}</>;
 
     const parts: React.ReactElement[] = [];
     let lastEnd = 0;
 
-    indexes.forEach(([start, length], i) => {
+    index.forEach(([start, length], i) => {
         if (start > lastEnd) {
-            parts.push(<React.Fragment key={`normal-${i}`}>{content.substring(lastEnd, start)}</React.Fragment>);
+            parts.push(<React.Fragment key={`normal-${i}`}>{text.substring(lastEnd, start)}</React.Fragment>);
         }
-        parts.push(<b key={`highlight-${i}`}>{content.substring(start, start + length)}</b>);
+        parts.push(<b key={`highlight-${i}`}>{text.substring(start, start + length)}</b>);
         lastEnd = start + length;
     });
 
-    if (lastEnd < content.length) {
-        parts.push(<React.Fragment key={`normal-last`}>{content.substring(lastEnd)}</React.Fragment>);
+    if (lastEnd < text.length) {
+        parts.push(<React.Fragment key={`normal-last`}>{text.substring(lastEnd)}</React.Fragment>);
     }
     return <>{parts}</>;
 }
 
+function useDebounce<T>(value: T, delay: number): T {
+    const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+}
 
 export default function Search() {
     const [query, setQuery] = useState('');
-    const [results, setResults] = useState<any[]>([]);
+    const [results, setResults] = useState<SearchResult[]>([]);
 
-    const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        const newQuery = e.target.value;
-        setQuery(newQuery);
-
-        if (newQuery.length > 1) {
-            const searchResults = await searchArticles(newQuery);
-            console.log(searchResults);
+    // Debounce
+    const debouncedQuery = useDebounce(query, 300);
+    const performSearch = useCallback(async (searchQuery: string) => {
+        if (searchQuery.length > 0) {
+            const searchResults = await searchArticles(searchQuery);
             setResults(searchResults);
         } else {
             setResults([]);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        performSearch(debouncedQuery).catch(error => console.error("Search error:", error));
+    }, [debouncedQuery, performSearch]);
 
     return (
         <div className={`flex flex-col`}>
@@ -54,18 +71,19 @@ export default function Search() {
                     <input
                         type="text"
                         value={query}
-                        onChange={handleChange}
+                        onChange={e => setQuery(e.target.value)}
                         placeholder="Search Anything..."
                         className="w-full px-3 py-2 border-2 rounded-lg"
                     />
 
                     <div className="mt-5">
                         {results.map((result, index) => (
-                            <div key={index} className={cn(
-                                "p-2", index !== 0 && "border-t"
-                            )}>
+                            <Link key={index} href={result.slug} className={"p-2"}>
                                 <h3>{highlightedText(result.title)}</h3>
-                            </div>
+                                {result.content.map((item, index) => (
+                                    <p key={index}>...{highlightedText(item)}...</p>
+                                ))}
+                            </Link>
                         ))}
                     </div>
                 </div>

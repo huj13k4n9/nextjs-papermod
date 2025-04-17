@@ -15,7 +15,7 @@ interface ArticleAttributes {
 }
 
 export function getArticleAttrs(content: string): ArticleAttributes {
-    const plainText = markdownToTxt(content).replaceAll(/\n+/gm, "\n");
+    const plainText = markdownToTxt(content).replaceAll(/[\n\s]+/gm, ' ');
     const summary = markdownToTxt(content
         .replaceAll(/^#{1,6} +.*\n*/gm, ""))
         .replaceAll(/\n+/gm, "\n")
