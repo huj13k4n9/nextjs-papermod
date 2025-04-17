@@ -53,16 +53,16 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
     return (
         <article>
             <Link href={ap.uri} className="flex flex-col space-y-3 p-6 border-1 rounded-2xl">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <h2 className="font-bold text-2xl line-clamp-1">{ap.title}</h2>
                     <ArticleAttributes
-                        date={ap.date} wordCount={ap.wordCount} showReadingTime={false}
-                        className="hidden sm:block text-[15px] min-w-64 text-right"
+                        date={ap.date} wordCount={ap.wordCount}
+                        className="hidden md:block text-[15px] min-w-[19rem] text-right"
                     />
                 </div>
-                <p className="line-clamp-2 text-base leading-relaxed sm:mb-0">{ap.summary}</p>
-                <ArticleAttributes date={ap.date} wordCount={ap.wordCount} showReadingTime={false}
-                                   className="sm:hidden text-[15px]"/>
+                <p className="line-clamp-2 text-base leading-relaxed md:mb-0">{ap.summary}</p>
+                <ArticleAttributes date={ap.date} wordCount={ap.wordCount}
+                                   className="md:hidden text-[15px]"/>
             </Link>
         </article>
     )

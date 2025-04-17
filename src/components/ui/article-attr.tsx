@@ -5,7 +5,6 @@ interface ArticleAttrs {
     date: Date;
     wordCount: number;
     className: string;
-    showReadingTime: boolean;
 }
 
 // https://github.com/ngryman/reading-time/blob/master/src/reading-time.ts
@@ -20,18 +19,17 @@ function getReadingTime(wordCount: number) {
         minutes: Math.floor(((time % 86400000) % 3600000) / 60000),
     }
 
-    return (displayed.days !== 0 ? `${displayed.days} 天 ` : "") +
-        (displayed.hours !== 0 ? `${displayed.hours} 时 ` : "") +
-        (displayed.minutes !== 0 ? `${displayed.minutes} 分` : "")
+    return displayed.days !== 0 ? `${displayed.days} 天 ` : displayed.hours !== 0 ? `${displayed.hours} 小时 ` : `${displayed.minutes} 分钟`
 }
 
-export default function ArticleAttributes({date, wordCount, className, showReadingTime}: ArticleAttrs) {
+export default function ArticleAttributes({date, wordCount, className}: ArticleAttrs) {
     return (
         <span className={className}>
             {date.getFullYear()} 年 {date.getMonth() + 1} 月 {date.getDate()} 日
             <Delimiter/>
             {wordCount} 字
-            {showReadingTime && (<><Delimiter/> {getReadingTime(wordCount)}</>)}
+            <Delimiter/>
+            {getReadingTime(wordCount)}
         </span>
     )
 }

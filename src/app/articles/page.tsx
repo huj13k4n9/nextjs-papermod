@@ -108,12 +108,10 @@ export default function Articles() {
                                         <Link
                                             href={`/article/${post.slug}`}
                                             key={`${yearData.year}${monthData.month}${postIndex}`}
-                                            className="flex flex-col flex-wrap items-start justify-center space-y-1 border-1 rounded-2xl px-4 py-3"
+                                            className="flex flex-col flex-wrap items-start justify-center space-y-1.5 border-1 rounded-2xl px-4 py-3"
                                         >
-                                            <span className={`text-xl font-semibold`}>{post.title}</span>
-                                            <ArticleAttributes date={post.date} wordCount={post.wordCount}
-                                                               showReadingTime={true}
-                                                               className="text-sm"/>
+                                            <span className={`text-xl font-semibold leading-snug`}>{post.title}</span>
+                                            <ArticleAttributes date={post.date} wordCount={post.wordCount} className="text-sm"/>
                                         </Link>
                                     ))}
                                 </div>
