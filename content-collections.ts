@@ -10,11 +10,12 @@ const posts = defineCollection({
         date: z.string(),
     }),
     transform: (data) => {
-        const {wordCount, summary} = getArticleAttrs(data.content);
+        const {wordCount, summary, plainText} = getArticleAttrs(data.content);
         return {
             ...data,
             wordCount,
             summary,
+            plainText,
             slug: data._meta.path.replaceAll('\\', '/'),
             date: new Date(data.date),
         };

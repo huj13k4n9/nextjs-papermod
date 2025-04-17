@@ -55,7 +55,7 @@ function NavLink({link, currentPath}: NavLinkProps) {
                         {link.icon}
                     </motion.span>
 
-                    <AnimatePresence mode="wait" initial={false}>
+                    <AnimatePresence mode="sync" initial={false}>
                         <motion.span
                             key={link.href}
                             initial={{opacity: 0, width: 0}}

@@ -11,6 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 interface ArticleAttributes {
     wordCount: number;
     summary: string;
+    plainText: string;
 }
 
 export function getArticleAttrs(content: string): ArticleAttributes {
@@ -21,6 +22,7 @@ export function getArticleAttrs(content: string): ArticleAttributes {
         .substring(0, 300);
 
     return {
+        plainText,
         wordCount: count(plainText),
         summary: summary
     };
