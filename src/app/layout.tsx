@@ -25,7 +25,7 @@ export default function RootLayout({children}: Readonly<{
         <Background>
             <Header/>
             <main className={cn(
-                "max-w-4xl mx-auto px-6 py-6",
+                "max-w-4xl mx-auto px-6 py-6 min-h-[calc(95vh-6rem-4rem)]",
                 config.site.nav.float && "md:mt-20 mt-28",
             )}>
                 {children}
