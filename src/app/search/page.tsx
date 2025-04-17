@@ -4,6 +4,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {LuSearch} from "react-icons/lu";
 import {searchArticles, SearchResult} from "@/lib/search";
 import Link from "next/link";
+import {AnimatePresence, motion} from "motion/react";
 
 function highlightedText({text, index}: { text: string, index: [number, number][] }) {
     if (!index.length) return <>{text}</>;
@@ -41,6 +42,43 @@ function useDebounce<T>(value: T, delay: number): T {
     return debouncedValue;
 }
 
+function SearchIndicator({count}: { count: number }) {
+    return (
+        <motion.div
+            className={"flex flex-row items-center rounded-full py-1"}
+            initial={{
+                paddingInline: "0px",
+                backgroundColor: "rgba(0, 0, 0, 0)",
+                color: "var(--foreground)"
+            }}
+            animate={{
+                paddingInline: count !== 0 ? "10px" : "0px",
+                backgroundColor: count !== 0 ? "var(--foreground)" : "rgba(0, 0, 0, 0)",
+                color: count !== 0 ? "#033639" : "var(--foreground)"
+            }}
+            transition={{
+                ease: "easeInOut",
+                duration: 0.3,
+                color: {duration: 0.5, delay: 0.3}
+            }}
+        >
+            <LuSearch className={`h-7 w-7`}/>
+            <AnimatePresence mode="sync" initial={false}>
+                {count !== 0 &&
+                    <motion.div
+                        className={`text-2xl font-bold ps-2 pe-1`}
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
+                        exit={{opacity: 0}}
+                    >
+                        {count}
+                    </motion.div>
+                }
+            </AnimatePresence>
+        </motion.div>
+    )
+}
+
 export default function Search() {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState<SearchResult[]>([]);
@@ -65,7 +103,7 @@ export default function Search() {
             <div className={`flex flex-col w-full mt-5 mb-8`}>
                 <div className="flex flex-row items-baseline justify-start space-x-2">
                     <h1 className="text-[42px] font-bold pr-1">文章搜索</h1>
-                    <LuSearch className={`h-7 w-7`}/>
+                    <SearchIndicator count={results.length}/>
                 </div>
                 <div className="mt-5">
                     <input
@@ -76,13 +114,19 @@ export default function Search() {
                         className="w-full px-3 py-2 border-2 rounded-lg"
                     />
 
-                    <div className="mt-5">
+                    <div className="mt-6 columns-2 gap-4">
                         {results.map((result, index) => (
-                            <Link key={index} href={result.slug} className={"p-2"}>
-                                <h3>{highlightedText(result.title)}</h3>
-                                {result.content.map((item, index) => (
-                                    <p key={index}>...{highlightedText(item)}...</p>
-                                ))}
+                            <Link
+                                key={index}
+                                href={result.slug}
+                                className="space-y-2.5 block mb-4 p-4 border-2 rounded-lg break-inside-avoid"
+                            >
+                                <h3 className={`text-2xl font-semibold`}>{highlightedText(result.title)}</h3>
+                                <div className={`text-sm leading-normal`}>
+                                    {result.content.map((item, index) => (
+                                        <p key={index}>...{highlightedText(item)}...</p>
+                                    ))}
+                                </div>
                             </Link>
                         ))}
                     </div>
