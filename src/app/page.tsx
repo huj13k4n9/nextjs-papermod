@@ -61,7 +61,8 @@ function ArticlePreview(ap: ArticleProps): React.ReactElement {
                     />
                 </div>
                 <p className="line-clamp-2 text-base leading-relaxed sm:mb-0">{ap.summary}</p>
-                <ArticleAttributes date={ap.date} wordCount={ap.wordCount} showReadingTime={false} className="sm:hidden text-[15px]"/>
+                <ArticleAttributes date={ap.date} wordCount={ap.wordCount} showReadingTime={false}
+                                   className="sm:hidden text-[15px]"/>
             </Link>
         </article>
     )

@@ -9,7 +9,7 @@ interface ArticleAttrs {
 }
 
 // https://github.com/ngryman/reading-time/blob/master/src/reading-time.ts
-function getReadingTime(wordCount: number){
+function getReadingTime(wordCount: number) {
     const wordsPerMinute = 200;
     const minutes = wordCount / wordsPerMinute;
     const time = Math.round(minutes * 60000);
@@ -21,8 +21,8 @@ function getReadingTime(wordCount: number){
     }
 
     return (displayed.days !== 0 ? `${displayed.days} 天 ` : "") +
-           (displayed.hours !== 0 ? `${displayed.hours} 时 ` : "") +
-           (displayed.minutes !== 0 ? `${displayed.minutes} 分` : "")
+        (displayed.hours !== 0 ? `${displayed.hours} 时 ` : "") +
+        (displayed.minutes !== 0 ? `${displayed.minutes} 分` : "")
 }
 
 export default function ArticleAttributes({date, wordCount, className, showReadingTime}: ArticleAttrs) {
