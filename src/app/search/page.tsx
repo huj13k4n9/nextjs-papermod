@@ -133,22 +133,20 @@ export default function Search() {
     }, [debouncedQuery, performSearch]);
 
     return (
-        <div className={`flex flex-col`}>
-            <div className={`flex flex-col w-full mt-5 mb-8`}>
-                <div className="flex flex-row items-baseline justify-start space-x-2">
-                    <h1 className="text-[42px] font-bold pr-1">文章搜索</h1>
-                    <SearchIndicator count={results.length}/>
-                </div>
-                <div className="mt-5">
-                    <input
-                        type="text"
-                        value={query}
-                        onChange={e => setQuery(e.target.value)}
-                        placeholder="Search Anything..."
-                        className="w-full px-3 py-2 border-2 rounded-lg"
-                    />
-                    <SearchResult results={results} />
-                </div>
+        <div className={`flex flex-col w-full mt-5 mb-8`}>
+            <div className="flex flex-row items-baseline justify-start space-x-2">
+                <h1 className="text-[42px] font-bold pr-1">文章搜索</h1>
+                <SearchIndicator count={results.length}/>
+            </div>
+            <div className="mt-5">
+                <input
+                    type="text"
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                    placeholder="Search Anything..."
+                    className="w-full px-3 py-2 border-2 rounded-lg"
+                />
+                <SearchResult results={results} />
             </div>
         </div>
     );
