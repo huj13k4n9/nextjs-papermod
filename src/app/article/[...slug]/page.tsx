@@ -13,6 +13,7 @@ import 'katex/dist/katex.min.css';
 import type {SerializeOptions} from "next-mdx-remote/dist/types";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import ArticleAttributes from "@/components/ui/article-attr";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const options: SerializeOptions = {
     mdxOptions: {
@@ -24,7 +25,23 @@ const options: SerializeOptions = {
                 defaultLang: "plaintext",
                 keepBackground: false,
             }],
-            rehypeSlug
+            [rehypeSlug, {
+                prefix: "heading-",
+            }],
+            [rehypeAutolinkHeadings, {
+                behavior: "append",
+                headingProperties: {
+                    className: ["group"],
+                },
+                properties: {
+                    className: ["ms-2 opacity-0 group-hover:opacity-100"],
+                    ariaHidden: true,
+                },
+                content: {
+                    type: "text",
+                    value: "#",
+                }
+            }],
         ],
     }
 }

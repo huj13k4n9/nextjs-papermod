@@ -6,22 +6,22 @@ import KaTeXWrapper from "@/components/ui/katex-wrapper";
 
 export const MDXComponents = {
     h1: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h1 className={cn("mt-8 mb-5 text-[32px] leading-snug tracking-tight font-semibold", className)} {...props} />
+        <h1 className={cn("mt-8 mb-5 text-[32px] leading-snug tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
     h2: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h2 className={cn("mt-7.5 mb-5 text-[28px] leading-snug tracking-tight font-semibold", className)} {...props} />
+        <h2 className={cn("mt-7.5 mb-5 text-[28px] leading-snug tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
     h3: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h3 className={cn("mt-7 mb-4.5 text-2xl leading-snug tracking-tight font-semibold", className)} {...props} />
+        <h3 className={cn("mt-7 mb-4.5 text-2xl leading-snug tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
     h4: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h4 className={cn("mt-6 mb-3 text-xl leading-normal tracking-tight font-semibold", className)} {...props} />
+        <h4 className={cn("mt-6 mb-3 text-xl leading-normal tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
     h5: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h5 className={cn("mt-5.5 mb-2.5 text-lg leading-normal tracking-tight font-semibold", className)} {...props} />
+        <h5 className={cn("mt-5.5 mb-2.5 text-lg leading-normal tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
     h6: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
-        <h6 className={cn("mt-5 mb-2 text-base leading-normal tracking-tight font-semibold", className)} {...props} />
+        <h6 className={cn("mt-5 mb-2 text-base leading-normal tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
     p: ({className, ...props}: React.HTMLAttributes<HTMLParagraphElement>) => (
         <p className={cn("mb-4 text-base leading-normal", className)} {...props} />
