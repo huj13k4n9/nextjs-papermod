@@ -5,40 +5,9 @@ import React from "react";
 import 'katex/dist/katex.min.css';
 import Breadcrumb from "@/components/ui/breadcrumb";
 import ArticleAttributes from "@/components/ui/article-attr";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
-const options: SerializeOptions = {
-    mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkMath],
-        rehypePlugins: [
-            rehypeKatex,
-            [rehypePrettyCode, {
-                bypassInlineCode: true,
-                defaultLang: "plaintext",
-                keepBackground: false,
-            }],
-            [rehypeSlug, {
-                prefix: "heading-",
-            }],
-            [rehypeAutolinkHeadings, {
-                behavior: "append",
-                headingProperties: {
-                    className: ["group"],
-                },
-                properties: {
-                    className: ["ms-2 opacity-0 group-hover:opacity-100"],
-                    ariaHidden: true,
-                },
-                content: {
-                    type: "text",
-                    value: "#",
-                }
-            }],
-        ],
-    }
-}
 import {cn} from "@/lib/utils";
 import {config} from "@/config";
+import TOC from "@/components/ui/toc";
 
 async function getBlogsFromParams(slugs: string[]) {
     const slug = slugs?.join("/") || ""
@@ -80,6 +49,7 @@ export default async function BlogArticlePage({params}: {
                     {content}
                 </div>
             </div>
+            <TOC data={headings} />
         </main>
     )
 }
