@@ -100,7 +100,7 @@ export default function Articles() {
                                      }}/>
                                 <h2 className="text-2xl font-semibold mt-5 mb-6 min-w-28">
                                     {monthToText(monthData.month)} <sup
-                                    className={`text-[15px] rounded-md bg-white text-black px-1.5 py-[1px]`}>{monthData.posts.length}</sup>
+                                    className={`text-[15px] rounded-md bg-(--foreground) text-[#033639] px-1.5 py-[1px]`}>{monthData.posts.length}</sup>
                                 </h2>
 
                                 <div className="space-y-4 w-full">

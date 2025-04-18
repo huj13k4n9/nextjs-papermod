@@ -86,7 +86,7 @@ function SearchResult({results}: { results: SearchResult[] }) {
             {results.length !== 0 &&
                 <>
                     <motion.div
-                        className="mt-6 mb-8 columns-2 gap-4"
+                        className="mt-6 mb-8 sm:columns-2 sm:gap-4"
                         initial={{opacity: 0}}
                         animate={{opacity: 1}}
                         exit={{opacity: 0}}

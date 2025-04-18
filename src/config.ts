@@ -47,11 +47,11 @@ export const config = {
         },
         background: {
             type: "gradient",
-            style: "linear-gradient(0deg, #7a0f40, #9333ea)",
+            style: "linear-gradient(75deg, #004a4a, #082026)",
             opacity: 1,
             overlay: true,
             overlayColor: "#000000",
-            overlayOpacity: 0.8,
+            overlayOpacity: 0.0,
             fixed: true,
         }
     }
