@@ -1,16 +1,8 @@
 import {allPosts, Post} from "content-collections";
-import {MDXRemote} from 'next-mdx-remote/rsc'
-import {MDXComponents} from "@/components/mdx-components";
+import MDXRenderer from "@/components/mdx";
 import {notFound} from 'next/navigation'
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeSlug from 'rehype-slug';
 import React from "react";
 import 'katex/dist/katex.min.css';
-// @ts-ignore
-import type {SerializeOptions} from "next-mdx-remote/dist/types";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import ArticleAttributes from "@/components/ui/article-attr";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -67,6 +59,8 @@ export default async function BlogArticlePage({params}: {
         notFound();
     }
 
+    const {headings, content} = await MDXRenderer({mdxContent: blog.content})
+
     return (
         <div className={`flex flex-col`}>
             <div className={`flex flex-col w-full mt-5 mb-8`}>
@@ -79,5 +73,17 @@ export default async function BlogArticlePage({params}: {
                 <MDXRemote source={blog.content} components={MDXComponents} options={options}/>
             </div>
         </div>
+            <div className={`flex flex-col max-w-4xl pr-10`}>
+                <div className={`flex flex-col mt-5 mb-8`}>
+                    <Breadcrumb
+                        items={[{index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`}]}/>
+                    <h1 className={`text-[42px] font-bold mb-0`}>{blog.title}</h1>
+                    <ArticleAttributes date={blog.date} wordCount={blog.wordCount} className="text-[15px]"/>
+                </div>
+
+                <div className={`article-content`}>
+                    {content}
+                </div>
+            </div>
     )
 }

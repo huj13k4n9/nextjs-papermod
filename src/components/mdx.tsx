@@ -1,10 +1,24 @@
+// @ts-nocheck
 import {cn, isInternalLink} from "@/lib/utils";
 import React from "react";
 import CodeBlock from "@/components/ui/codeblock";
 import Link from "next/link";
-import KaTeXWrapper from "@/components/ui/katex-wrapper";
+import {compileMDX} from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import {visit} from "unist-util-visit";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
-export const MDXComponents = {
+export interface HeadingNode {
+    level: number;
+    text: string;
+    id: string;
+}
+
+const MdxComponents = {
     h1: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h1 className={cn("mt-8 mb-5 text-[32px] leading-snug tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
     ),
@@ -27,7 +41,6 @@ export const MDXComponents = {
         <p className={cn("mb-4 text-base leading-normal", className)} {...props} />
     ),
     a: ({className, ...props}: React.HTMLAttributes<HTMLAnchorElement>) => {
-        // @ts-ignore
         const href = props.href;
         return (
             <Link
@@ -129,5 +142,74 @@ export const MDXComponents = {
         />
     ),
     span: ({className, ...props}: React.HTMLAttributes<HTMLSpanElement>) => (
-        <KaTeXWrapper className={className} {...props} />)
+        <span className={className} {...props}/>)
+}
+
+export default async function MDXRenderer({mdxContent}: {mdxContent: string}): Promise<{
+    headings: HeadingNode[];
+    content: React.ReactElement;
+}> {
+    const headings: HeadingNode[] = []
+    const { content } = await compileMDX({
+        source: mdxContent,
+        options: {
+            parseFrontmatter: true,
+            mdxOptions: {
+                remarkPlugins: [
+                    remarkGfm,
+                    [remarkMath, {
+                        singleDollarTextMath: true
+                    }]
+                ],
+                rehypePlugins: [
+                    rehypeKatex,
+                    [rehypePrettyCode, {
+                        bypassInlineCode: true,
+                        defaultLang: "plaintext",
+                        keepBackground: false,
+                    }],
+                    [rehypeSlug, {
+                        prefix: "heading-",
+                    }],
+                    // Get headings for TOC
+                    () => {
+                        return (tree) => {
+                            visit(tree, 'element', (node) => {
+                                if (node.tagName.match(/^h[1-6]$/)) {
+                                    headings.push({
+                                        level: parseInt(node.tagName.replace('h', "")),
+                                        text: node.children
+                                            .filter((c) => c.type === "text")
+                                            .map((c) => c.value)
+                                            .join(""),
+                                        id: node.properties?.id as string,
+                                    })
+                                }
+                            })
+                        }
+                    },
+                    [rehypeAutolinkHeadings, {
+                        behavior: "append",
+                        headingProperties: {
+                            className: ["group"],
+                        },
+                        properties: {
+                            className: ["ms-2 opacity-0 group-hover:opacity-100"],
+                            ariaHidden: true,
+                        },
+                        content: {
+                            type: "text",
+                            value: "#",
+                        }
+                    }],
+                ],
+            }
+        },
+        components: MdxComponents,
+    });
+
+    return {
+        headings,
+        content
+    }
 }
