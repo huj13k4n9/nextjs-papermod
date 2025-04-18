@@ -34,10 +34,10 @@ export default async function BlogArticlePage({params}: {
 
     return (
         <main className={cn(
-            "max-w-4xl mx-auto py-6 min-h-[calc(95vh-6rem-4rem)] xl:max-w-6xl xl:flex xl:flex-row xl:justify-center xl:gap-5",
+            "max-w-4xl mx-auto py-6 min-h-[calc(95vh-6rem-4rem)] xl:max-w-6xl xl:flex xl:flex-row xl:justify-between xl:gap-18 px-8",
             config.site.nav.float && "md:mt-20 mt-28",
         )}>
-            <div className={`flex flex-col max-w-4xl pr-10`}>
+            <div className={`flex flex-col w-full xl:w-4/5`}>
                 <div className={`flex flex-col mt-5 mb-8`}>
                     <Breadcrumb
                         items={[{index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`}]}/>
@@ -49,7 +49,7 @@ export default async function BlogArticlePage({params}: {
                     {content}
                 </div>
             </div>
-            <TOC data={headings} />
+            <TOC data={headings} className="w-full xl:w-1/5" />
         </main>
     )
 }
