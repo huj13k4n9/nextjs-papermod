@@ -6,6 +6,8 @@ import {LuSearch} from "react-icons/lu";
 import {searchArticles, SearchResult} from "@/lib/search";
 import Link from "next/link";
 import {AnimatePresence, motion} from "motion/react";
+import {cn} from "@/lib/utils";
+import {config} from "@/config";
 
 function highlightedText({text, index}: { text: string, index: [number, number][] }) {
     if (!index.length) return <>{text}</>;
@@ -133,21 +135,26 @@ export default function Search() {
     }, [debouncedQuery, performSearch]);
 
     return (
-        <div className={`flex flex-col w-full mt-5 mb-8`}>
-            <div className="flex flex-row items-baseline justify-start space-x-2">
-                <h1 className="text-[42px] font-bold pr-1">文章搜索</h1>
-                <SearchIndicator count={results.length}/>
+        <main className={cn(
+            "max-w-4xl mx-auto px-6 py-6 min-h-[calc(95vh-6rem-4rem)]",
+            config.site.nav.float && "md:mt-20 mt-28",
+        )}>
+            <div className={`flex flex-col w-full mt-5 mb-8`}>
+                <div className="flex flex-row items-baseline justify-start space-x-2">
+                    <h1 className="text-[42px] font-bold pr-1">文章搜索</h1>
+                    <SearchIndicator count={results.length}/>
+                </div>
+                <div className="mt-5">
+                    <input
+                        type="text"
+                        value={query}
+                        onChange={e => setQuery(e.target.value)}
+                        placeholder="Search Anything..."
+                        className="w-full px-3 py-2 border-2 rounded-lg"
+                    />
+                    <SearchResult results={results} />
+                </div>
             </div>
-            <div className="mt-5">
-                <input
-                    type="text"
-                    value={query}
-                    onChange={e => setQuery(e.target.value)}
-                    placeholder="Search Anything..."
-                    className="w-full px-3 py-2 border-2 rounded-lg"
-                />
-                <SearchResult results={results} />
-            </div>
-        </div>
+        </main>
     );
 }

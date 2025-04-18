@@ -37,6 +37,8 @@ const options: SerializeOptions = {
         ],
     }
 }
+import {cn} from "@/lib/utils";
+import {config} from "@/config";
 
 async function getBlogsFromParams(slugs: string[]) {
     const slug = slugs?.join("/") || ""
@@ -62,17 +64,10 @@ export default async function BlogArticlePage({params}: {
     const {headings, content} = await MDXRenderer({mdxContent: blog.content})
 
     return (
-        <div className={`flex flex-col`}>
-            <div className={`flex flex-col w-full mt-5 mb-8`}>
-                <Breadcrumb
-                    items={[{index: 1, text: `Home`, href: `/`}, {index: 2, text: `Article`, href: `/articles`}]}/>
-                <h1 className={`text-[42px] font-bold mb-0`}>{blog.title}</h1>
-                <ArticleAttributes date={blog.date} wordCount={blog.wordCount} className="text-[15px]"/>
-            </div>
-            <div className={`article-content`}>
-                <MDXRemote source={blog.content} components={MDXComponents} options={options}/>
-            </div>
-        </div>
+        <main className={cn(
+            "max-w-4xl mx-auto py-6 min-h-[calc(95vh-6rem-4rem)] xl:max-w-6xl xl:flex xl:flex-row xl:justify-center xl:gap-5",
+            config.site.nav.float && "md:mt-20 mt-28",
+        )}>
             <div className={`flex flex-col max-w-4xl pr-10`}>
                 <div className={`flex flex-col mt-5 mb-8`}>
                     <Breadcrumb
@@ -85,5 +80,6 @@ export default async function BlogArticlePage({params}: {
                     {content}
                 </div>
             </div>
+        </main>
     )
 }

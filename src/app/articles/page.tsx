@@ -3,6 +3,8 @@ import {allPosts, Post} from "content-collections";
 import Link from "next/link";
 import {LuRss} from "react-icons/lu";
 import ArticleAttributes from "@/components/ui/article-attr";
+import {cn} from "@/lib/utils";
+import {config} from "@/config";
 
 type YearMonthPosts = {
     year: number;
@@ -64,7 +66,10 @@ export default function Articles() {
     organizedPosts.sort((a, b) => b.year - a.year);
 
     return (
-        <div className="flex flex-col">
+        <main className={cn(
+            "max-w-4xl mx-auto px-6 py-6 min-h-[calc(95vh-6rem-4rem)] flex flex-col",
+            config.site.nav.float && "md:mt-20 mt-28",
+        )}>
             <div className="flex flex-col w-full mt-5 mb-8">
                 <div className="flex flex-row items-baseline justify-start space-x-2">
                     <h1 className="text-[42px] font-bold pr-1">文章列表</h1>
@@ -120,6 +125,6 @@ export default function Articles() {
                     </li>
                 ))}
             </ol>
-        </div>
+        </main>
     );
 }

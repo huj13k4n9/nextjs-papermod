@@ -87,7 +87,10 @@ export default async function Home({searchParams}: {
     const currentPageArticles = sortedPosts.slice(startIndex, endIndex);
 
     return (
-        <>
+        <main className={cn(
+            "max-w-4xl mx-auto px-6 py-6 min-h-[calc(95vh-6rem-4rem)]",
+            config.site.nav.float && "md:mt-20 mt-28",
+        )}>
             <div className={`flex flex-col justify-center min-h-96 px-2`}>
                 <IndexBanner/>
             </div>
@@ -127,6 +130,6 @@ export default async function Home({searchParams}: {
                     </Link>
                 </div>
             }
-        </>
+        </main>
     );
 }
