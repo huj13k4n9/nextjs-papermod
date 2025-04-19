@@ -2,7 +2,6 @@
 
 import React, {useCallback, useEffect, useState} from "react";
 import {LuSearch} from "react-icons/lu";
-// @ts-ignore
 import {searchArticles, SearchResult} from "@/lib/search";
 import Link from "next/link";
 import {AnimatePresence, motion} from "motion/react";
@@ -82,7 +81,7 @@ function SearchIndicator({count}: { count: number }) {
     )
 }
 
-function SearchResult({results}: { results: SearchResult[] }) {
+function SearchResultList({results}: { results: SearchResult[] }) {
     return (
         <AnimatePresence mode="wait" initial={false}>
             {results.length !== 0 &&
@@ -152,7 +151,7 @@ export default function Search() {
                         placeholder="Search Anything..."
                         className="w-full px-3 py-2 border-2 rounded-lg"
                     />
-                    <SearchResult results={results}/>
+                    <SearchResultList results={results}/>
                 </div>
             </div>
         </main>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {cn, isInternalLink} from "@/lib/utils";
 import React from "react";
 import CodeBlock from "@/components/ui/codeblock";
@@ -10,7 +9,7 @@ import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import {visit} from "unist-util-visit";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import type {Root} from "hast";
 
 export interface HeadingNode {
     level: number;
@@ -18,7 +17,7 @@ export interface HeadingNode {
     id: string;
 }
 
-function extractTextFromNode(node) {
+function extractTextFromNode(node: any): string {
     if (!node) return '';
     if (node.type === 'text') return node.value || '';
     if (!node.children || !Array.isArray(node.children)) {
@@ -26,13 +25,13 @@ function extractTextFromNode(node) {
     }
 
     return node.children
-        .map(child => extractTextFromNode(child))
+        .map((child: any) => extractTextFromNode(child))
         .join('');
 }
 
-function createHeadingsExtractor(headings) {
+function createHeadingsExtractor(headings: HeadingNode[]): () => (tree: Root) => undefined {
     return () => {
-        return (tree) => {
+        return (tree: Root) => {
             visit(tree, 'element', (node) => {
                 if (node.tagName.match(/^h[1-6]$/)) {
                     headings.push({
@@ -100,16 +99,13 @@ const MdxComponents = {
     p: ({className, ...props}: React.HTMLAttributes<HTMLParagraphElement>) => (
         <p className={cn("mb-4 text-base leading-normal", className)} {...props} />
     ),
-    a: ({className, ...props}: React.HTMLAttributes<HTMLAnchorElement>) => {
-        const href = props.href;
-        return (
-            <Link
-                href={href}
-                className={cn("font-normal transition-all underline underline-offset-3", className)}
-                target={isInternalLink(href) ? "_self" : "_blank"} {...props}
-            />
-        )
-    },
+    a: ({className, href, ...props}: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+        <Link
+            href={href || "#"}
+            className={cn("font-normal transition-all underline underline-offset-3", className)}
+            target={isInternalLink(href || "#") ? "_self" : "_blank"} {...props}
+        />
+    ),
     Link: ({className, href, ...props}: React.ComponentProps<typeof Link>) => {
         return (
             <Link

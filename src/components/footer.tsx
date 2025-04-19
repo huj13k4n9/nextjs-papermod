@@ -15,8 +15,7 @@ interface RunningTime {
 function getRunningTime(createdDate: string): RunningTime {
     const now = new Date();
     const startDate = new Date(createdDate);
-    // @ts-ignore
-    const diffTime = now - startDate;
+    const diffTime = now.getTime() - startDate.getTime();
     const days = Math.floor(diffTime / 86400000);
     const hours = Math.floor((diffTime % 86400000) / 3600000);
     const minutes = Math.floor((diffTime % 3600000) / 60000);
