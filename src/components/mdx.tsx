@@ -18,6 +18,34 @@ export interface HeadingNode {
     id: string;
 }
 
+function extractTextFromNode(node) {
+    if (!node) return '';
+    if (node.type === 'text') return node.value || '';
+    if (!node.children || !Array.isArray(node.children)) {
+        return '';
+    }
+
+    return node.children
+        .map(child => extractTextFromNode(child))
+        .join('');
+}
+
+function createHeadingsExtractor(headings) {
+    return () => {
+        return (tree) => {
+            visit(tree, 'element', (node) => {
+                if (node.tagName.match(/^h[1-6]$/)) {
+                    headings.push({
+                        level: parseInt(node.tagName.replace('h', "")),
+                        text: extractTextFromNode(node),
+                        id: node.properties?.id as string,
+                    });
+                }
+            });
+        };
+    };
+}
+
 const MdxComponents = {
     h1: ({className, ...props}: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h1 className={cn("mt-8 mb-5 text-[32px] leading-snug tracking-tight font-semibold scroll-mt-32 md:scroll-mt-20", className)} {...props} />
@@ -157,9 +185,7 @@ export default async function MDXRenderer({mdxContent}: {mdxContent: string}): P
             mdxOptions: {
                 remarkPlugins: [
                     remarkGfm,
-                    [remarkMath, {
-                        singleDollarTextMath: true
-                    }]
+                    [remarkMath, { singleDollarTextMath: true }]
                 ],
                 rehypePlugins: [
                     rehypeKatex,
@@ -168,26 +194,9 @@ export default async function MDXRenderer({mdxContent}: {mdxContent: string}): P
                         defaultLang: "plaintext",
                         keepBackground: false,
                     }],
-                    [rehypeSlug, {
-                        prefix: "heading-",
-                    }],
+                    rehypeSlug,
                     // Get headings for TOC
-                    () => {
-                        return (tree) => {
-                            visit(tree, 'element', (node) => {
-                                if (node.tagName.match(/^h[1-6]$/)) {
-                                    headings.push({
-                                        level: parseInt(node.tagName.replace('h', "")),
-                                        text: node.children
-                                            .filter((c) => c.type === "text")
-                                            .map((c) => c.value)
-                                            .join(""),
-                                        id: node.properties?.id as string,
-                                    })
-                                }
-                            })
-                        }
-                    },
+                    createHeadingsExtractor(headings),
                     [rehypeAutolinkHeadings, {
                         behavior: "append",
                         headingProperties: {

@@ -12,12 +12,7 @@ import TOC from "@/components/ui/toc";
 async function getBlogsFromParams(slugs: string[]) {
     const slug = slugs?.join("/") || ""
     const blog = allPosts.find((blog: Post) => blog.slug === slug);
-
-    if (!blog) {
-        return null
-    }
-
-    return blog
+    return blog ? blog : null;
 }
 
 export default async function BlogArticlePage({params}: {
@@ -25,13 +20,9 @@ export default async function BlogArticlePage({params}: {
 }) {
     const {slug} = await params
     const blog = await getBlogsFromParams(slug)
-
-    if (!blog) {
-        notFound();
-    }
+    if (!blog) { notFound(); }
 
     const {headings, content} = await MDXRenderer({mdxContent: blog.content})
-
     return (
         <main className={cn(
             "max-w-4xl mx-auto py-6 min-h-[calc(95vh-6rem-4rem)] xl:max-w-6xl xl:flex xl:flex-row xl:justify-between xl:gap-18 px-8",
