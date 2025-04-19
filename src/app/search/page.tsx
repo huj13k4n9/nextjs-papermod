@@ -152,7 +152,7 @@ export default function Search() {
                         placeholder="Search Anything..."
                         className="w-full px-3 py-2 border-2 rounded-lg"
                     />
-                    <SearchResult results={results} />
+                    <SearchResult results={results}/>
                 </div>
             </div>
         </main>

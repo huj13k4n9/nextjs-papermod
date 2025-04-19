@@ -20,7 +20,9 @@ export default async function BlogArticlePage({params}: {
 }) {
     const {slug} = await params
     const blog = await getBlogsFromParams(slug)
-    if (!blog) { notFound(); }
+    if (!blog) {
+        notFound();
+    }
 
     const {headings, content} = await MDXRenderer({mdxContent: blog.content})
     return (
@@ -40,7 +42,7 @@ export default async function BlogArticlePage({params}: {
                     {content}
                 </div>
             </div>
-            <TOC data={headings} className="w-full xl:w-1/5" />
+            <TOC data={headings} className="w-full xl:w-1/5"/>
         </main>
     )
 }

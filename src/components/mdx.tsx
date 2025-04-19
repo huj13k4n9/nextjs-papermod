@@ -173,19 +173,19 @@ const MdxComponents = {
         <span className={className} {...props}/>)
 }
 
-export default async function MDXRenderer({mdxContent}: {mdxContent: string}): Promise<{
+export default async function MDXRenderer({mdxContent}: { mdxContent: string }): Promise<{
     headings: HeadingNode[];
     content: React.ReactElement;
 }> {
     const headings: HeadingNode[] = []
-    const { content } = await compileMDX({
+    const {content} = await compileMDX({
         source: mdxContent,
         options: {
             parseFrontmatter: true,
             mdxOptions: {
                 remarkPlugins: [
                     remarkGfm,
-                    [remarkMath, { singleDollarTextMath: true }]
+                    [remarkMath, {singleDollarTextMath: true}]
                 ],
                 rehypePlugins: [
                     rehypeKatex,
